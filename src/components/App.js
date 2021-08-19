@@ -29,16 +29,10 @@ class App extends Component {
       accountBalance: "",
       theSportiesContract: null,
       theSportiesCount: 0,
-      cryptoBoys: [],
+      theSportiesTotal: 0,
       loading: true,
       metamaskConnected: false,
-      contractDetected: false,
-      totalTokensMinted: 0,
-      totalTokensOwnedByAccount: 0,
-      nameIsUsed: false,
-      colorIsUsed: false,
-      colorsUsed: [],
-      lastMintTime: null,
+      contractDetected: false
     };
   }
 
@@ -81,14 +75,14 @@ class App extends Component {
         this.setState({ theSportiesContract });
         this.setState({ contractDetected: true });
         const theSportiesCount = await theSportiesContract.methods.totalSupply().call();
+        let theSportiesTotal = await theSportiesContract.methods.TOTAL_ITEMS.call();
+        const tokenBalance = await theSportiesContract.methods.balanceOf(accounts[0]).call();
+        theSportiesTotal = theSportiesTotal.toNumber();
         this.setState({ theSportiesCount });
-        console.log('Count is ' + theSportiesCount);
-        // let totalTokensMinted = await cryptoBoysContract.methods.getNumberOfTokensMinted().call();
-        // totalTokensMinted = totalTokensMinted.toNumber();
-        // this.setState({ totalTokensMinted });
-        // let totalTokensOwnedByAccount = await cryptoBoysContract.methods.getTotalNumberOfTokensOwnedByAnAddress(this.state.accountAddress).call();
-        // totalTokensOwnedByAccount = totalTokensOwnedByAccount.toNumber();
-        // this.setState({ totalTokensOwnedByAccount });
+        this.setState({ theSportiesTotal });
+        console.log(`Minted token: ${theSportiesCount}`);
+        console.log(`Total token: ${theSportiesTotal}`);
+        console.log(`Balance: ${tokenBalance}`);
         this.setState({ loading: false });
       } else {
         this.setState({ contractDetected: false });
