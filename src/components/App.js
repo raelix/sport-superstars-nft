@@ -10,9 +10,9 @@ import AccountDetails from "./AccountDetails/AccountDetails";
 import ContractNotDeployed from "./ContractNotDeployed/ContractNotDeployed";
 import ConnectToMetamask from "./ConnectMetamask/ConnectToMetamask";
 import Loading from "./Loading/Loading";
-import Navbar from "./Navbar/Navbar"; 
+import Navbar from "./Navbar/Navbar";
 import MyCryptoBoys from "./MyCryptoBoys/MyCryptoBoys";
-import Queries from "./Queries/Queries"; 
+import Queries from "./Queries/Queries";
 
 const ipfsClient = require("ipfs-http-client");
 const ipfs = ipfsClient({
@@ -82,36 +82,36 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-          <>
-            <HashRouter basename="/">
-              <Navbar render={(this.state) } />
-              <Route
-                path="/"
-                exact
-                render={() => (
-                  <div/>
-                )} 
-              />
-              <Route
-                path="/mint"
-                render={() => (
-                  <tr/>
-                )}
-              />
-              <Route
-                path="/team"
-                render={() => (
-                  <tr/>
-                )}
-              />
-              <Route
-                path="/roadmap"
-                render={() => (
-                  <tr/>
-                )}
-              />
-            </HashRouter>
-          </>
+        <>
+          <HashRouter basename="/">
+            <Navbar parentState={(this.state)}/>
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <div />
+              )}
+            />
+            <Route
+              path="/mint"
+              render={() => (
+                <tr />
+              )}
+            />
+            <Route
+              path="/team"
+              render={() => (
+                <tr />
+              )}
+            />
+            <Route
+              path="/roadmap"
+              render={() => (
+                <tr />
+              )}
+            />
+          </HashRouter>
+        </>
       </div>
     );
   }
