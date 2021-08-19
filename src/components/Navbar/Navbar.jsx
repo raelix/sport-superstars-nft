@@ -72,7 +72,6 @@ import { Component } from "react";
               </Link>
             </li>
             <li className="nav-item">
-
             {!this.state.metamaskConnected ? (
           <ConnectToMetamask connectToMetamask={this.connectToMetamask} />
         ) : (<AccountDetails
