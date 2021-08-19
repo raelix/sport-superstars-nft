@@ -64,7 +64,7 @@ class Navbar extends Component {
                 {!this.props.parentState.metamaskConnected ? 
                 ( <ConnectToMetamask connectToMetamask={this.connectToMetamask} />) 
                 :
-               ( <AccountDetails accountAddress={this.props.parentState.accountAddress} />)
+                  (<AccountDetails accountAddress={this.props.parentState.accountAddress} error={!this.props.parentState.contractDetected} />)
                 }
               </li>
             </ul>

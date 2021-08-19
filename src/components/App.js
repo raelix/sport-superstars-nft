@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { HashRouter, Route } from "react-router-dom";
 import "./App.css";
 import Web3 from "web3";
-import CryptoBoys from "../build/TheSporties.json";
+import TheSporties from "../build/TheSporties.json";
 
 import FormAndPreview from "../components/FormAndPreview/FormAndPreview";
 import AllCryptoBoys from "./AllCryptoBoys/AllCryptoBoys";
@@ -27,8 +27,8 @@ class App extends Component {
     this.state = {
       accountAddress: "",
       accountBalance: "",
-      cryptoBoysContract: null,
-      cryptoBoysCount: 0,
+      theSportiesContract: null,
+      theSportiesCount: 0,
       cryptoBoys: [],
       loading: true,
       metamaskConnected: false,
@@ -71,7 +71,28 @@ class App extends Component {
       let accountBalance = await web3.eth.getBalance(accounts[0]);
       accountBalance = web3.utils.fromWei(accountBalance, "Ether");
       this.setState({ accountBalance });
-      this.setState({ contractDetected: true });
+      const networkId = await web3.eth.net.getId();
+      const networkData = TheSporties.networks[networkId];
+      if (networkData) {
+        const theSportiesContract = web3.eth.Contract(
+          TheSporties.abi,
+          networkData.address
+        );
+        this.setState({ theSportiesContract });
+        this.setState({ contractDetected: true });
+        const theSportiesCount = await theSportiesContract.methods.totalSupply().call();
+        this.setState({ theSportiesCount });
+        console.log('Count is ' + theSportiesCount);
+        // let totalTokensMinted = await cryptoBoysContract.methods.getNumberOfTokensMinted().call();
+        // totalTokensMinted = totalTokensMinted.toNumber();
+        // this.setState({ totalTokensMinted });
+        // let totalTokensOwnedByAccount = await cryptoBoysContract.methods.getTotalNumberOfTokensOwnedByAnAddress(this.state.accountAddress).call();
+        // totalTokensOwnedByAccount = totalTokensOwnedByAccount.toNumber();
+        // this.setState({ totalTokensOwnedByAccount });
+        this.setState({ loading: false });
+      } else {
+        this.setState({ contractDetected: false });
+      }
       this.setState({ loading: false });
       // const networkId = await web3.eth.net.getId();
     }
