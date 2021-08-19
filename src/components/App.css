@@ -1,0 +1,28 @@
+input::-webkit-input-placeholder {
+  font-size: 1rem;
+}
+
+input[type="color"]:hover {
+  cursor: pointer;
+}
+
+.jumbotron {
+ padding: 0 !important;
+ margin: 0 !important;
+}
+
+.nav-item {
+  display: flex !important;
+ }
+
+.nav-link {
+  margin: auto !important;
+}
+
+.flex-container {
+  display: flex !important;
+}
+
+.int-container {
+  margin: auto !important;
+}
