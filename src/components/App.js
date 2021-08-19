@@ -116,7 +116,7 @@ class App extends Component {
       .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
       // .send({ from: this.state.accountAddress, value: window.web3.utils.toWei('0.0001', "Ether") })
       .on("confirmation", function (res) {
-        console.log(`Confirmed by the ${res} block`);
+        console.log(`Confirmed by the block ${res}`);
         if (res == 1)
         window.alert('Confirmed!');
         
