@@ -14,6 +14,10 @@ const ipfs = ipfsClient({
   protocol: "https",
 });
 
+const NetworksBinding = {
+  4: 'https://rinkeby.etherscan.io'
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +32,7 @@ class App extends Component {
       loading: true,
       metamaskConnected: false,
       contractDetected: false,
+      currentNetId: -1,
       saleIsActive: false
     };
   }
@@ -62,6 +67,7 @@ class App extends Component {
       accountBalance = web3.utils.fromWei(accountBalance, "Ether");
       this.setState({ accountBalance });
       const networkId = await web3.eth.net.getId();
+      this.setState({ currentNetId: networkId });
       const networkData = TheSporties.networks[networkId];
       if (networkData) {
         const theSportiesContract = web3.eth.Contract(
@@ -89,7 +95,8 @@ class App extends Component {
         console.log(`Item price: ${itemPrice} eth`);
         console.log(`Token user balance: ${tokenBalance}`);
         console.log(`User eth balance: ${accountBalance}`);
-        console.log(`${saleIsActive ? 'Sale active': 'Sale inactive'}`);
+        console.log(`Network ID: ${networkId}`);
+        console.log(`${saleIsActive ? 'Sale active' : 'Sale inactive'}`);
         this.setState({ loading: false });
       } else {
         this.setState({ contractDetected: false });
@@ -100,8 +107,32 @@ class App extends Component {
 
   mint = async (tokenCount) => {
     console.log('Mint please');
+    const netID = this.state.currentNetId;
+    this.setState({ loading: true });
     const totalPrice = this.state.itemPrice * tokenCount;
     console.log(`Total mint price: ${totalPrice}`);
+    this.state.theSportiesContract.methods
+      .mintTheSporties(tokenCount)
+      .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
+      // .send({ from: this.state.accountAddress, value: window.web3.utils.toWei('0.0001', "Ether") })
+      .on("confirmation", function (res) {
+        console.log(`Confirmed by the ${res} block`);
+        if (res == 1)
+        window.alert('Confirmed!');
+        
+      })
+      .on('error', function (error) {
+        window.alert(error.message);
+       })
+      .on('transactionHash', function (transactionHash) {
+        console.log(transactionHash);
+        const transactionURL = NetworksBinding[netID] + '/tx/' + transactionHash;
+        window.alert(`You can check your transaction ${transactionURL}`);
+       })
+      .on('receipt', function (receipt) {
+        console.log('receipt') 
+        console.log(receipt.contractAddress) 
+      });
   }
 
 
@@ -110,7 +141,7 @@ class App extends Component {
       <div className="container">
         <>
           <HashRouter basename="/">
-            <Navbar parentState={(this.state)}/>
+            <Navbar parentState={(this.state)} />
             <Route
               path="/"
               exact
@@ -121,7 +152,7 @@ class App extends Component {
             <Route
               path="/mint"
               render={() => (
-                <Mint mint={this.mint} parentState={this.state}/>
+                <Mint mint={this.mint} parentState={this.state} />
               )}
             />
             <Route
