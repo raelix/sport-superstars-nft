@@ -4,15 +4,8 @@ import "./App.css";
 import Web3 from "web3";
 import TheSporties from "../build/TheSporties.json";
 
-import FormAndPreview from "../components/FormAndPreview/FormAndPreview";
-import AllCryptoBoys from "./AllCryptoBoys/AllCryptoBoys";
-import AccountDetails from "./AccountDetails/AccountDetails";
-import ContractNotDeployed from "./ContractNotDeployed/ContractNotDeployed";
-import ConnectToMetamask from "./ConnectMetamask/ConnectToMetamask";
-import Loading from "./Loading/Loading";
+import Mint from "./Mint/Mint";
 import Navbar from "./Navbar/Navbar";
-import MyCryptoBoys from "./MyCryptoBoys/MyCryptoBoys";
-import Queries from "./Queries/Queries";
 
 const ipfsClient = require("ipfs-http-client");
 const ipfs = ipfsClient({
@@ -30,9 +23,12 @@ class App extends Component {
       theSportiesContract: null,
       theSportiesCount: 0,
       theSportiesTotal: 0,
+      maxItemsPerMint: 0,
+      itemPrice: 0.0,
       loading: true,
       metamaskConnected: false,
-      contractDetected: false
+      contractDetected: false,
+      saleIsActive: false
     };
   }
 
@@ -77,21 +73,36 @@ class App extends Component {
         const theSportiesCount = await theSportiesContract.methods.totalSupply().call();
         let theSportiesTotal = await theSportiesContract.methods.TOTAL_ITEMS.call();
         const tokenBalance = await theSportiesContract.methods.balanceOf(accounts[0]).call();
+        const maxItemsPerMint = await theSportiesContract.methods.MAX_ITEMS_PER_MINT.call();
+        let itemPrice = await theSportiesContract.methods.itemPrice().call();
+        const saleIsActive = await theSportiesContract.methods.saleIsActive.call();
         theSportiesTotal = theSportiesTotal.toNumber();
+        itemPrice = web3.utils.fromWei(itemPrice.toString(), "Ether");
         this.setState({ theSportiesCount });
         this.setState({ theSportiesTotal });
+        this.setState({ maxItemsPerMint });
+        this.setState({ itemPrice });
+        this.setState({ saleIsActive });
         console.log(`Minted token: ${theSportiesCount}`);
         console.log(`Total token: ${theSportiesTotal}`);
-        console.log(`Balance: ${tokenBalance}`);
+        console.log(`Max items per mint: ${maxItemsPerMint}`);
+        console.log(`Item price: ${itemPrice} eth`);
+        console.log(`Token user balance: ${tokenBalance}`);
+        console.log(`User eth balance: ${accountBalance}`);
+        console.log(`${saleIsActive ? 'Sale active': 'Sale inactive'}`);
         this.setState({ loading: false });
       } else {
         this.setState({ contractDetected: false });
       }
       this.setState({ loading: false });
-      // const networkId = await web3.eth.net.getId();
     }
   };
 
+  mint = async (tokenCount) => {
+    console.log('Mint please');
+    const totalPrice = this.state.itemPrice * tokenCount;
+    console.log(`Total mint price: ${totalPrice}`);
+  }
 
 
   render() {
@@ -110,7 +121,7 @@ class App extends Component {
             <Route
               path="/mint"
               render={() => (
-                <tr />
+                <Mint mint={this.mint} parentState={this.state}/>
               )}
             />
             <Route
