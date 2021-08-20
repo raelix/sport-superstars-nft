@@ -100,7 +100,7 @@ deployMetadata = () => {
         metadata.image = gatewayImagesURL + '/' + metadata.image;
         metadata.external_url = metadata.image;
 
-        let metadataFullName = `${tokens_dir}/${metadata.id}.json`
+        let metadataFullName = `${tokens_dir}/${metadata.id}`
 
         console.log(`Creating metadata token file ${metadataFullName}`);
 
