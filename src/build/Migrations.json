@@ -17,8 +17,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -31,8 +30,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -57,7 +55,7 @@
   "sourceMap": "58:311:14:-:0;;;210:50;;;;;;;;;;245:10;237:5;;:18;;;;;;;;;;;;;;;;;;58:311;;;;;;",
   "deployedSourceMap": "58:311:14:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;106:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;82:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;264:103;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;106:36;;;;:::o;82:20::-;;;;;;;;;;;;:::o;264:103::-;193:5;;;;;;;;;;179:19;;:10;:19;;;175:26;;;353:9:::1;326:24;:36;;;;175:26:::0;264:103;:::o",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.7.6;\n\ncontract Migrations {\n  address public owner;\n  uint public last_completed_migration;\n\n  modifier restricted() {\n    if (msg.sender == owner) _;\n  }\n\n  constructor() public {\n    owner = msg.sender;\n  }\n\n  function setCompleted(uint completed) public restricted {\n    last_completed_migration = completed;\n  }\n}\n",
-  "sourcePath": "/Users/gianmarco/dev/projects/crypto/TheSporties/contracts/Migrations.sol",
+  "sourcePath": "/home/gascenzo/TheSporties/contracts/Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -925,8 +923,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-08-19T17:51:44.121Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-08-20T14:03:33.333Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -21,12 +21,12 @@
 require('dotenv').config()
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-//
+
 const fs = require('fs');
 
-const mnemonic = fs.readFileSync(".secret").toString().trim();
-
 const rinkeby_private_key = process.env.RINKEBY_PRIVATE_KEY
+
+const private_key = ""
 
 module.exports = {
   /**
@@ -67,7 +67,7 @@ module.exports = {
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     // ropsten: {
-    // provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/YOUR-PROJECT-ID`),
+    // provider: () => new HDWalletProvider(private_key, `https://ropsten.infura.io/v3/YOUR-PROJECT-ID`),
     // network_id: 3,       // Ropsten's id
     // gas: 5500000,        // Ropsten has a lower block limit than mainnet
     // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
@@ -75,7 +75,7 @@ module.exports = {
     // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     // },
     kovan: {
-      provider: () => new HDWalletProvider(mnemonic, `https://kovan.infura.io/v3/326743225dcd443d9087bae75c622a8a`),
+      provider: () => new HDWalletProvider(private_key, `https://kovan.infura.io/v3/326743225dcd443d9087bae75c622a8a`),
       network_id: 42,       // kovan's id
       gas: 12500000,        // kovan has a lower block limit than mainnet
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
@@ -90,7 +90,7 @@ module.exports = {
     },
     // Useful for private networks
     // private: {
-    // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
+    // provider: () => new HDWalletProvider(private_key, `https://network.io`),
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
