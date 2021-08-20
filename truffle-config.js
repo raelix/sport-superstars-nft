@@ -18,10 +18,15 @@
  *
  */
 
+require('dotenv').config()
+
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 //
 const fs = require('fs');
+
 const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+const rinkeby_private_key = process.env.RINKEBY_PRIVATE_KEY
 
 module.exports = {
   /**
@@ -78,7 +83,7 @@ module.exports = {
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
     rinkeby: {
-      provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/2362480577a940d18fddfe12f46100d9`),
+      provider: () => new HDWalletProvider(rinkeby_private_key, `https://rinkeby.infura.io/v3/2362480577a940d18fddfe12f46100d9`),
       network_id: 4,
       gas: 5500000,
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
