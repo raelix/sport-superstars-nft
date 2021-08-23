@@ -1,5 +1,9 @@
 # TheSporties NFT
 
+### Discord Group Invite
+
+https://discord.gg/EcgEet9G
+
 ### Run the DApp Locally
 #### Install truffle
 ```
