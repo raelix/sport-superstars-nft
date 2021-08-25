@@ -8,6 +8,7 @@
 .secret
 
 /input/*/*.png
+/metadata/images/*.png
 # testing
 /coverage
 

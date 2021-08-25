@@ -4,7 +4,7 @@ const {layers,width,height} = require('./layersLoader.js');
 
 const outputFolder = "./metadata";
 const outputImagesFolder = `${outputFolder}/images`;
-const MAX_ITEMS = 10;
+const MAX_ITEMS = 100;
 
 // init canvas
 
