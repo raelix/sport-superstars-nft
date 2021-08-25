@@ -49,3 +49,12 @@ npm start
 npm install -g truffle-flattener
 truffle-flattener contracts/TheSporties.sol > TheSporties.sol
 ```
+
+
+### Inkscape useful batch command
+N.B. the layers must be visible (up to now we have sublayers as well so this approach needs to be revisited)
+```bash
+for lay in $(inkscape --query-all NFT.svg  | grep "g" | grep -v svg | awk -F, '{print $1}'); do 
+inkscape NFT.svg -i $lay -j -C --export-png=testme/$lay.png; 
+done
+```
