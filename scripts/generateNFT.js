@@ -21,6 +21,7 @@ const saveLayer = (canvas, elementIndex) => {
 const drawLayer = async (ctx, layer, elementIndex, randomNumber) => {
     // get a random item of this layer
     let element = layer.elements[randomNumber];
+    console.log(`there is a ${layer.rarity} % of probability to see this`);
     addProperty(layer, element, elementIndex);
     return await loadImage(`${layer.location}${element.fileName}`);
 
@@ -28,7 +29,7 @@ const drawLayer = async (ctx, layer, elementIndex, randomNumber) => {
 
 const addProperty = async (layer, element, elementIndex) => {
     metadata[elementIndex].attributes.push({
-        "trait_type": layer.name.replace(/(^\w|\s\w)/g, m => m.toUpperCase()),
+        "trait_type": layer.name,
         "value": element.attributeName
     });
 }
@@ -49,8 +50,8 @@ const getRandomMap = (MAX_ITEMS, layers) => {
         do {
             currentElement = getRandom(layers);
         } while (currentElement in randomMap);
-        randomMap[currentElement] = currentElement;
-        randomMap[elementIndex] = currentElement;
+        randomMap[currentElement] = currentElement; // this is useful to search for a duplicate random O(1)
+        randomMap[elementIndex] = currentElement; // this is useful to get the random of an item O(n)
     }
     return randomMap;
 }

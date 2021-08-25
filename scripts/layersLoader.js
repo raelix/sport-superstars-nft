@@ -54,14 +54,30 @@ const getElements = (path) => {
         });
 };
 
+const getElementsRarity = (path) => {
+    let totalOccurrences = getElements(path).reduce((flattened, element) => flattened.concat(element), []).length;
+    console.log(totalOccurrences);
+    return fs
+        .readdirSync(path)
+        .filter((item) => !/(^|\/)\.[^\/\.]/g.test(item))
+        .map((i, index) => {
+            let result = {};
+            let occurrences = getOccurrences(i);
+            result[getAttributeFromFileName(i)] = Math.floor((occurrences * 100 / totalOccurrences));
+            console.log(result);
+            return result;
+        });
+};
 
+// occurrences:total length=x:100
 const generateLayersList = (orderedFolders, layers) => {
     orderedFolders.forEach((item, index) => {
         layers.push({
             id: index,
-            name: item,
+            name: item.replace(/(^\w|\s\w)/g, m => m.toUpperCase()),
             location: `${dir}/${item}/`,
             elements: getElements(`${dir}/${item}/`).reduce((flattened, element) => flattened.concat(element), []),
+            rarity: getElementsRarity(`${dir}/${item}/`),
             position: { x: 0, y: 0 },
             size: { width: width, height: height },
         });
