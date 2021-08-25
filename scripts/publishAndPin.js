@@ -18,7 +18,7 @@ const images_dir = `${metadata_dir}/images`;
 
 const tokens_dir = `${metadata_dir}/tokens`;
 
-const metadata_blob = `${metadata_dir}/metadata_blob.json`;
+const metadata_blob = `${metadata_dir}/_metadata.json`;
 
 const hashes_link = `${metadata_dir}/hashes_link.json`;
 
@@ -93,7 +93,7 @@ deployMetadata = () => {
 
     fs.mkdirSync(tokens_dir, { recursive: true });
 
-    let metadataList = require(`.${metadata_blob}`).metadata;
+    let metadataList = require(`.${metadata_blob}`);
 
     metadataList.forEach((metadata) => {
 
