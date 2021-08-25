@@ -1,10 +1,10 @@
 const fs = require("fs");
 const { createCanvas, loadImage } = require("canvas");
-const {layers,width,height} = require('./layersLoader.js');
+const { layers, width, height } = require('./layersLoader.js');
 
 const outputFolder = "./metadata";
 const outputImagesFolder = `${outputFolder}/images`;
-const MAX_ITEMS = 100;
+const MAX_ITEMS = 10;
 
 // init canvas
 
@@ -18,23 +18,60 @@ const saveLayer = (canvas, elementIndex) => {
 };
 
 
-const drawLayer = async (ctx, layer, elementIndex) => {
+const drawLayer = async (ctx, layer, elementIndex, randomNumber) => {
     // get a random item of this layer
-    let indexAreYouLucky = Math.floor(Math.random() * layer.elements.length);
-    let element = layer.elements[indexAreYouLucky];
+    let element = layer.elements[randomNumber];
     addProperty(layer, element, elementIndex);
     return await loadImage(`${layer.location}${element.fileName}`);
-    
-  };
+
+};
 
 const addProperty = async (layer, element, elementIndex) => {
     metadata[elementIndex].attributes.push({
-        "trait_type": layer.name,
+        "trait_type": layer.name.replace(/(^\w|\s\w)/g, m => m.toUpperCase()),
         "value": element.attributeName
     });
 }
 
+
+const getRandom = (layers) => {
+    let random = [];
+    for (let i = 0; i < layers.length; i++) {
+        random.push(Math.floor(Math.random() * layers[i].elements.length));
+    }
+    return random;
+}
+
+const getRandomMap = (MAX_ITEMS, layers) => {
+    const randomMap = {};
+    for (let elementIndex = 0; elementIndex < MAX_ITEMS; elementIndex++) {
+        let currentElement = getRandom(layers);
+        do {
+            currentElement = getRandom(layers);
+        } while (currentElement in randomMap);
+        randomMap[currentElement] = currentElement;
+        randomMap[elementIndex] = currentElement;
+    }
+    return randomMap;
+}
+
+
+function write(array, path) {
+    fs.writeFileSync(path, JSON.stringify(array, null, 2));
+}
+
+function read(path) {
+    const fileContent = fs.readFileSync(path);
+    const array = JSON.parse(fileContent);
+    return array;
+}
+
 // main
+let randomItems = {};
+// N.B. If you want to save this random map you need to uncomment the `read` line and comment the `randomItems` and `write` one
+randomItems = getRandomMap(MAX_ITEMS, layers);
+write(randomItems, `${outputFolder}/_randomMap.json`);
+// randomItems = read(`${outputFolder}/_randomMap.json`);
 
 for (let elementIndex = 0; elementIndex < MAX_ITEMS; elementIndex++) {
 
@@ -46,20 +83,22 @@ for (let elementIndex = 0; elementIndex < MAX_ITEMS; elementIndex++) {
         name: `TheSporties #${elementIndex}`,
         icon: "",
         description: `The real #${elementIndex} item`,
-        attributes: [], 
+        attributes: [],
     });
 
-    layers.forEach((layer) => {
-        drawLayer(ctx, layer, elementIndex).then( (image) => {
+    layers.forEach((layer, index) => {
+        // get the item id=elementIndex and layer at index
+        const randomNumber = randomItems[elementIndex][index];
+        drawLayer(ctx, layer, elementIndex, randomNumber).then((image) => {
             ctx.drawImage(
                 image,
                 layer.position.x,
                 layer.position.y,
                 layer.size.width,
                 layer.size.height
-              );
+            );
 
-        saveLayer(canvas, elementIndex);
+            saveLayer(canvas, elementIndex);
         });
 
     });
@@ -68,4 +107,4 @@ for (let elementIndex = 0; elementIndex < MAX_ITEMS; elementIndex++) {
 }
 
 
-fs.writeFileSync(`${outputFolder}/_metadata.json`, JSON.stringify(metadata));
+fs.writeFileSync(`${outputFolder}/_metadata.json`, JSON.stringify(metadata, null, 2));

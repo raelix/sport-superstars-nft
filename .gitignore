@@ -6,7 +6,7 @@
 /.pnp
 .pnp.js
 .secret
-
+/randomMap.json
 /input/*/*.png
 /metadata/images/*.png
 # testing
