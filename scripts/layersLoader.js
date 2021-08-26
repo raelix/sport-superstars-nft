@@ -26,7 +26,7 @@ const getAttributeFromFileName = (_str) => {
 
 const getOccurrences = (_str) => {
     let matchResult = _str.match(/_([0-9]+).png/)
-   return matchResult.length > 0 ? matchResult[1] : 1;
+    return matchResult.length > 0 ? matchResult[1] : 1;
 }
 
 const getElements = (path) => {
@@ -36,7 +36,7 @@ const getElements = (path) => {
         .map((i, index) => {
             let result = [];
             let occurrences = getOccurrences(i);
-            for (let index = 0; index < occurrences; index++){
+            for (let index = 0; index < occurrences; index++) {
                 result.push({
                     attributeName: getAttributeFromFileName(i),
                     fileName: i,
@@ -51,23 +51,30 @@ const getElements = (path) => {
             // }});
 
             return result;
-        });
+        }).reduce((flattened, element) => flattened.concat(element), []);
 };
 
-const getElementsRarity = (path) => {
-    let totalOccurrences = getElements(path).reduce((flattened, element) => flattened.concat(element), []).length;
-    console.log(totalOccurrences);
-    return fs
+const getElementsRarityByFolder = (path) => {
+    let result = {};
+    let totalOccurrences = getElements(path).length;
+    fs
         .readdirSync(path)
         .filter((item) => !/(^|\/)\.[^\/\.]/g.test(item))
-        .map((i, index) => {
-            let result = {};
+        .forEach((i) => {
             let occurrences = getOccurrences(i);
             result[getAttributeFromFileName(i)] = Math.floor((occurrences * 100 / totalOccurrences));
-            console.log(result);
-            return result;
         });
+    return result;
 };
+
+const getElementsRarityMap = (orderedFolders) => {
+    let result = {};
+    orderedFolders.forEach((item, index) => {
+        let currentFolder = getElementsRarityByFolder(`${dir}/${item}/`);
+        result = { ...result, ...currentFolder }
+    });
+    return result;
+}
 
 // occurrences:total length=x:100
 const generateLayersList = (orderedFolders, layers) => {
@@ -76,8 +83,8 @@ const generateLayersList = (orderedFolders, layers) => {
             id: index,
             name: item.replace(/(^\w|\s\w)/g, m => m.toUpperCase()),
             location: `${dir}/${item}/`,
-            elements: getElements(`${dir}/${item}/`).reduce((flattened, element) => flattened.concat(element), []),
-            rarity: getElementsRarity(`${dir}/${item}/`),
+            elements: getElements(`${dir}/${item}/`),
+            // rarity: getElementsRarity(`${dir}/${item}/`),
             position: { x: 0, y: 0 },
             size: { width: width, height: height },
         });
@@ -88,5 +95,6 @@ const generateLayersList = (orderedFolders, layers) => {
 
 const layers = generateLayersList(orderedFolders, []);
 
+const rarity = getElementsRarityMap(orderedFolders);
 
-module.exports = { layers, width, height };
+module.exports = { layers, rarity, width, height };
