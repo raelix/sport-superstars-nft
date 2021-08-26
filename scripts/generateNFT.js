@@ -4,6 +4,7 @@ const { layers, rarity, width, height } = require('./layersLoader.js');
 
 const outputFolder = "./metadata";
 const outputImagesFolder = `${outputFolder}/images`;
+// const MAX_ITEMS = 8888;
 const MAX_ITEMS = 10;
 
 // init canvas
@@ -85,10 +86,6 @@ function read(path) {
     return array;
 }
 
-
-
-
-
 const main = async (elementIndex) => {
 
     if (elementIndex == MAX_ITEMS) {
@@ -130,6 +127,7 @@ const main = async (elementIndex) => {
     saveImage(canvas, elementIndex);
     let itemRarityPercentage = computeMetadataIndexRarity(elementIndex);
     addRarityProperty(elementIndex, itemRarityPercentage);
+    console.log(`Generated image n. ${elementIndex}`);
     setTimeout(main, 1, ++elementIndex);
 }
 
