@@ -26,15 +26,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="351.43207"
-     inkscape:cy="506.99556"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="-307.2379"
+     inkscape:cy="-150.9673"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="1920"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer13"
+     inkscape:current-layer="g164807"
      inkscape:snap-others="true"
      inkscape:object-nodes="true"
      inkscape:snap-midpoints="false"
@@ -83,8 +83,7 @@
      inkscape:groupmode="layer"
      id="layer17"
      inkscape:label="background"
-     style="display:none"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <g
        inkscape:groupmode="layer"
        id="g121673"
@@ -637,8 +636,7 @@
        inkscape:groupmode="layer"
        id="g164807"
        inkscape:label="background sport players 1"
-       style="display:none"
-       sodipodi:insensitive="true">
+       style="display:inline">
       <rect
          style="opacity:1;fill:#cfb10d;fill-opacity:1;stroke:none;stroke-width:0.665001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect192319"
@@ -669,13 +667,13 @@
      inkscape:groupmode="layer"
      id="layer11"
      inkscape:label="body"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <g
        inkscape:label="body ebony 1"
        inkscape:groupmode="layer"
        id="g1334"
-       style="display:none"
+       style="display:inline"
        sodipodi:insensitive="true">
       <path
          id="path1298"
@@ -1584,7 +1582,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="shirt"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <g
        inkscape:groupmode="layer"
@@ -1629,7 +1627,7 @@
        inkscape:groupmode="layer"
        id="g38130"
        inkscape:label="shirt basket la 1 "
-       style="display:none"
+       style="display:inline"
        sodipodi:insensitive="true">
       <path
          style="fill:#fdca0e;fill-opacity:1;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1833,7 +1831,7 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="eyes"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <g
        inkscape:groupmode="layer"
@@ -2285,7 +2283,7 @@
        inkscape:groupmode="layer"
        id="g1323"
        inkscape:label="eyes brown 5"
-       style="display:none"
+       style="display:inline"
        sodipodi:insensitive="true">
       <path
          style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.406823;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -2376,7 +2374,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="hair"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <g
        inkscape:groupmode="layer"
@@ -2649,7 +2647,7 @@
        inkscape:groupmode="layer"
        id="g64836"
        inkscape:label="hair tuft rock 2"
-       style="display:none">
+       style="display:inline">
       <path
          style="fill:#6f713e;fill-opacity:0.390461;stroke:none;stroke-width:0.332168px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 78.529732,113.702 1.379833,4.77316 0.206894,0.22436 3.966664,2.9677 -1.631657,-13.91697 0.03237,-18.896843 2.106387,-10.552671 4.369342,-6.948629 3.192765,-3.451559 4.697434,-0.460269 24.376866,4.185727 10.33179,0.38356 5.10961,-0.413025 20.8443,-3.421818 8.42008,-0.769949 7.31543,2.983697 3.94403,6.758192 2.81255,10.479038 -0.19162,10.521717 -0.10041,11.829622 -2.51915,10.32927 5.75266,-5.36281 1.16949,-2.27701 c 0.67698,-4.78669 2.15934,-7.82383 1.48917,-14.809816 l -1.88479,-11.708634 -3.04528,-10.914274 -3.33152,-5.961289 -9.3931,-8.591847 -4.42143,-3.505242 -13.83186,-6.622843 -13.46284,-3.399348 -12.62589,-0.378827 -7.57408,1.469111 -7.80532,2.456113 -5.85051,2.845573 -7.017655,5.441905 -5.363869,4.165576 -5.53671,6.999161 -3.701434,7.606165 -2.628377,9.80979 -1.378093,10.102581 1.085778,13.172255 z"
@@ -2895,7 +2893,7 @@
        inkscape:groupmode="layer"
        id="g59017"
        inkscape:label="hair good guy 4"
-       style="display:inline">
+       style="display:none">
       <path
          style="fill:none;stroke:none;stroke-width:0.111542px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 181.8054,114.58952 -5.19558,-10.91079 v -8.312996 l -4.67603,4.676046 -6.23474,-12.988996 -6.23471,11.430342 1.03909,3.117364 -4.67603,-2.078247 -1.5587,-2.078264 -1.55864,-14.547678 -5.7152,14.547678 -4.67602,-15.586804 11.43032,-13.508575 33.25188,25.458456 z"
@@ -2931,7 +2929,7 @@
      inkscape:groupmode="layer"
      id="layer13"
      inkscape:label="accessories"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <g
        inkscape:groupmode="layer"
