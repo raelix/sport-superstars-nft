@@ -86,16 +86,10 @@ contract TheSporties is ERC721, Ownable {
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
-        string memory base = baseURI();
-        if( bytes(base).length == 0 ){
+        string memory baseURI = baseURI();
+        if( bytes(baseURI).length == 0 ){
             return IPFS_GUESS_ITEM;
         }
-
-        if (bytes(_tokenURI).length > 0) {
-            return string(abi.encodePacked(base, _tokenURI));
-        }
-
-        return string(abi.encodePacked(base, tokenId.toString()));
+        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, Strings.toString(tokenId))) : "";
     }
-
 }
