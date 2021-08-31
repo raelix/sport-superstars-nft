@@ -3,7 +3,7 @@ const width = 1000;
 const height = 1000;
 const dir = "./input";
 
-const orderedFolders = ["background", "body", "eyes", "hair", "accessories"];
+const orderedFolders = ["background", "body", "eyes", "hair", "shirt", "accessories"];
 
 const getAttributeFromFileName = (_str) => {
     // Explanation:
