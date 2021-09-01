@@ -25,7 +25,7 @@ class Mint extends Component {
             >
                 <div className="form-group mt-4 ">
                     <label htmlFor="tokenCount">
-                        <span className="font-weight-bold">Mint TheSporties</span> :
+                        <span className="font-weight-bold">Mint Sport Legends</span> :
                     </label>{" "}
                     <input
                         required
@@ -51,7 +51,7 @@ class Mint extends Component {
                     className="btn btn-outline-info mt-0 w-50"
                 >
                     
-                    {this.props.parentState.theSportiesCount >= this.props.parentState.theSportiesTotal ? 'SOLDOUT' : this.props.parentState.saleIsActive ? 'Mint (' + this.props.parentState.itemPrice * this.state.tokenCount + ' eth)' : 'SALE INACTIVE'}
+                    {this.props.parentState.sportLegendsCount >= this.props.parentState.sportLegendsTotal ? 'SOLDOUT' : this.props.parentState.saleIsActive ? 'Mint (' + this.props.parentState.itemPrice * this.state.tokenCount + ' eth)' : 'SALE INACTIVE'}
                 </button>
             </form>
 

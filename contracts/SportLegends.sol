@@ -7,7 +7,7 @@ import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract TheSporties is ERC721, Ownable {
+contract SportLegends is ERC721, Ownable {
 
     using SafeMath for uint256;
     
@@ -24,7 +24,7 @@ contract TheSporties is ERC721, Ownable {
     string private constant IPFS_GUESS_ITEM = "ipfs://QmWuCeHL1uajjNELKfeH18azZ3KSB1YffTtbjaNJqZp19f";
     bool public saleIsActive = false;
 
-    constructor() ERC721("TheSporties", "TSPT") {
+    constructor() ERC721("SportLegends", "SPL") {
     }
 
     function withdraw() public onlyOwner {
@@ -59,7 +59,7 @@ contract TheSporties is ERC721, Ownable {
         }
     }
 
-    function airdropForCommunity( address [] memory recipients ) public onlyOwner {
+    function giftSportLegends( address [] memory recipients ) public onlyOwner {
         require(recipients.length + giftItems < GIFT_ITEMS + 1, "Can't gift more than 50 items");
         require(totalSupply().add(recipients.length) <= TOTAL_ITEMS, "Gift items would exceed max supply");
         uint256 supply = totalSupply();        
@@ -69,7 +69,7 @@ contract TheSporties is ERC721, Ownable {
         }
     }
 
-    function mintTheSporties(uint numberOfTokens) public payable {
+    function mintSportLegends(uint numberOfTokens) public payable {
         require(saleIsActive, "Sale must be active to mint");
         require(numberOfTokens <= MAX_ITEMS_PER_MINT, "Can't mint more than 10 items");
         require(totalSupply().add(numberOfTokens) <= TOTAL_ITEMS, "Purchase would exceed max supply");

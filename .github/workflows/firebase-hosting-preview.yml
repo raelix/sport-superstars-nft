@@ -15,7 +15,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_THESPORTIES_0 }}'
-          projectId: thesporties-0
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPORT_LEGENDS_NFT }}'
+          projectId: sport-legends-nft
           expires: "1h"
           channelId: '${{ github.sha }}'

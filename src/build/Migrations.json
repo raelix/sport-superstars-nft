@@ -57,7 +57,7 @@
   "sourceMap": "58:311:14:-:0;;;210:50;;;;;;;;;;245:10;237:5;;:18;;;;;;;;;;;;;;;;;;58:311;;;;;;",
   "deployedSourceMap": "58:311:14:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;106:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;82:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;264:103;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;106:36;;;;:::o;82:20::-;;;;;;;;;;;;:::o;264:103::-;193:5;;;;;;;;;;179:19;;:10;:19;;;175:26;;;353:9:::1;326:24;:36;;;;175:26:::0;264:103;:::o",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.7.6;\n\ncontract Migrations {\n  address public owner;\n  uint public last_completed_migration;\n\n  modifier restricted() {\n    if (msg.sender == owner) _;\n  }\n\n  constructor() public {\n    owner = msg.sender;\n  }\n\n  function setCompleted(uint completed) public restricted {\n    last_completed_migration = completed;\n  }\n}\n",
-  "sourcePath": "/home/gascenzo/TheSporties/contracts/Migrations.sol",
+  "sourcePath": "/Users/gianmarco/dev/projects/sport-legends/contracts/Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -920,12 +920,12 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0xb93bd76CB4A7EF1d87aDd42Ad417734f03dCF729",
-      "transactionHash": "0x6835b807ee964fe5a01ceb64e8a763d9faf776eecac01751e6198359d9610721"
+      "address": "0x4DbD95836D999E0D99aBce6b9f4C8B685Be17e94",
+      "transactionHash": "0x6865ed7ee2881b1085bc4b8e43fc5e463c57bc2d4ee1c478cdd983539959b97d"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-01T13:33:28.803Z",
+  "updatedAt": "2021-09-01T22:51:57.531Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

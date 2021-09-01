@@ -26,7 +26,7 @@ class Navbar extends Component {
         <div className="container">
           <img src={icon} alt="" />
           <Link to="/" className="navbar-brand ml-2">
-            The Sporties
+            Sport Legends
           </Link>
           <button
             className="navbar-toggler"

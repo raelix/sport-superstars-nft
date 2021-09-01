@@ -1,4 +1,4 @@
-# TheSporties NFT
+# Sport Legends NFT
 
 ### Discord Group Invite
 
@@ -19,7 +19,7 @@ ganache-cli --port 7545 --quiet
 ```
 #### Open new terminal window and clone this repository
 ```
-git clone https://github.com/raelix/TheSporties.git
+git clone https://github.com/raelix/sport-legends.git
 ```
 #### Install dependencies
 ```
@@ -47,7 +47,7 @@ npm start
 ### Flatten contract
 ```
 npm install -g truffle-flattener
-truffle-flattener contracts/TheSporties.sol > TheSporties.sol
+truffle-flattener contracts/SportLegends.sol > SportLegends.sol
 ```
 
 

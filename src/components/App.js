@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { HashRouter, Route } from "react-router-dom";
 import "./App.css";
 import Web3 from "web3";
-import TheSporties from "../build/TheSporties.json";
+import SportLegends from "../build/SportLegends.json";
 
 import Mint from "./Mint/Mint";
 import Navbar from "./Navbar/Navbar";
@@ -24,9 +24,9 @@ class App extends Component {
     this.state = {
       accountAddress: "",
       accountBalance: "",
-      theSportiesContract: null,
-      theSportiesCount: 0,
-      theSportiesTotal: 0,
+      sportLegendsContract: null,
+      sportLegendsCount: 0,
+      sportLegendsTotal: 0,
       maxItemsPerMint: 0,
       itemPrice: 0.0,
       loading: true,
@@ -68,29 +68,29 @@ class App extends Component {
       this.setState({ accountBalance });
       const networkId = await web3.eth.net.getId();
       this.setState({ currentNetId: networkId });
-      const networkData = TheSporties.networks[networkId];
+      const networkData = SportLegends.networks[networkId];
       if (networkData) {
-        const theSportiesContract = web3.eth.Contract(
-          TheSporties.abi,
+        const sportLegendsContract = web3.eth.Contract(
+          SportLegends.abi,
           networkData.address
         );
-        this.setState({ theSportiesContract });
+        this.setState({ sportLegendsContract });
         this.setState({ contractDetected: true });
-        const theSportiesCount = await theSportiesContract.methods.totalSupply().call();
-        let theSportiesTotal = await theSportiesContract.methods.TOTAL_ITEMS.call();
-        const tokenBalance = await theSportiesContract.methods.balanceOf(accounts[0]).call();
-        const maxItemsPerMint = await theSportiesContract.methods.MAX_ITEMS_PER_MINT.call();
-        let itemPrice = await theSportiesContract.methods.itemPrice().call();
-        const saleIsActive = await theSportiesContract.methods.saleIsActive.call();
-        theSportiesTotal = theSportiesTotal.toNumber();
+        const sportLegendsCount = await sportLegendsContract.methods.totalSupply().call();
+        let sportLegendsTotal = await sportLegendsContract.methods.TOTAL_ITEMS.call();
+        const tokenBalance = await sportLegendsContract.methods.balanceOf(accounts[0]).call();
+        const maxItemsPerMint = await sportLegendsContract.methods.MAX_ITEMS_PER_MINT.call();
+        let itemPrice = await sportLegendsContract.methods.itemPrice().call();
+        const saleIsActive = await sportLegendsContract.methods.saleIsActive.call();
+        sportLegendsTotal = sportLegendsTotal.toNumber();
         itemPrice = web3.utils.fromWei(itemPrice.toString(), "Ether");
-        this.setState({ theSportiesCount });
-        this.setState({ theSportiesTotal });
+        this.setState({ sportLegendsCount });
+        this.setState({ sportLegendsTotal });
         this.setState({ maxItemsPerMint });
         this.setState({ itemPrice });
         this.setState({ saleIsActive });
-        console.log(`Minted token: ${theSportiesCount}`);
-        console.log(`Total token: ${theSportiesTotal}`);
+        console.log(`Minted token: ${sportLegendsCount}`);
+        console.log(`Total token: ${sportLegendsTotal}`);
         console.log(`Max items per mint: ${maxItemsPerMint}`);
         console.log(`Item price: ${itemPrice} eth`);
         console.log(`Token user balance: ${tokenBalance}`);
@@ -111,8 +111,8 @@ class App extends Component {
     this.setState({ loading: true });
     const totalPrice = this.state.itemPrice * tokenCount;
     console.log(`Total mint price: ${totalPrice}`);
-    this.state.theSportiesContract.methods
-      .mintTheSporties(tokenCount)
+    this.state.sportLegendsContract.methods
+      .mintSportLegends(tokenCount)
       .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
       // .send({ from: this.state.accountAddress, value: window.web3.utils.toWei('0.0001', "Ether") })
       .on("confirmation", function (res) {
