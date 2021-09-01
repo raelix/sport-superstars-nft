@@ -1,5 +1,29 @@
 {
   "dependencies": {
+    "serve": "^12.0.0"
+  },
+  "scripts": {
+    "install-dev": "npm install --only=dev",
+    "install-prod": "npm install --only=prod",
+    "truffle-compile": "truffle compile",
+    "build": "react-scripts build && cp build/index.html build/404.html",
+    "clean": "rm -rf src/build && rm -rf build",
+    "deploy": "truffle migrate --network rinkeby --reset",
+    "flatten": "truffle-flattener contracts/TheSporties.sol > TheSporties.sol",
+    "start": "react-scripts start",
+    "static": "serve -s build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "gh-pages": "^3.1.0",
     "@truffle/hdwallet-provider": "^1.4.3",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
@@ -29,25 +53,5 @@
     "truffle-flattener": "^1.5.0",
     "truffle-plugin-verify": "^0.5.11",
     "web3": "1.0.0-beta.55"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "static": "serve -s build",
-    "build": "truffle compile && react-scripts build && cp build/index.html build/404.html",
-    "clean": "rm -rf src/build && rm -rf build",
-    "deploy": "truffle migrate",
-    "flatten": "truffle-flattener contracts/TheSporties.sol > TheSporties.sol"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "gh-pages": "^3.1.0"
   }
 }

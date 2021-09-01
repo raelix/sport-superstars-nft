@@ -1,10 +1,31 @@
-FROM node:12.16.3-alpine as build
-WORKDIR /usr/src/app
-COPY . .
-RUN npm install && npm run build && rm -rf node_modules
+FROM node:10.19.0 AS builder
 
-# production environment
-FROM nginx:stable-alpine
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+WORKDIR /usr/src/app
+
+COPY package.json ./
+
+RUN npm run install-dev && npm run build
+
+COPY . .
+
+RUN npm run build
+
+############
+
+FROM node:10.19.0
+
+LABEL version="1.0"
+LABEL description="This is the base docker image for Sport Legends react app."
+LABEL maintainer = ["raelix@hotmail.it"]
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+
+RUN npm run install-prod
+
+COPY --from=builder /usr/src/app/build .
+
 EXPOSE 8081
-CMD ["nginx", "-g", "daemon off;"]
+
+CMD [ "npm", "run", "static" ]
