@@ -1,4 +1,4 @@
-FROM node:10.19.0 AS builder
+FROM node:latest AS builder
 
 WORKDIR /usr/src/app
 
@@ -14,7 +14,7 @@ RUN npm run build
 
 ############
 
-FROM node:10.19.0
+FROM node:latest
 
 LABEL version="1.0"
 LABEL description="This is the base docker image for Sport Legends react app."
