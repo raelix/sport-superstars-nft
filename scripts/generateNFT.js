@@ -100,9 +100,9 @@ const main = async (elementIndex) => {
     // push the empty item for this index
     metadata.push({
         id: `${elementIndex}`,
-        name: `TheSporties #${elementIndex}`,
+        name: `Sport Legends #${elementIndex}`,
         icon: "",
-        description: `The real #${elementIndex} item`,
+        description: `Sport Legends are here! Try to catch them!`,
         attributes: [],
     });
 

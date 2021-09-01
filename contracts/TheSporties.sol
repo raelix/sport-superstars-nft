@@ -21,7 +21,7 @@ contract TheSporties is ERC721, Ownable {
     uint128 public constant MAX_ITEMS_PER_MINT = 10;
 
     uint256 private giftItems = 0;
-    string private constant IPFS_GUESS_ITEM = "https://ipfs.io/ipfs/";
+    string private constant IPFS_GUESS_ITEM = "ipfs://QmWuCeHL1uajjNELKfeH18azZ3KSB1YffTtbjaNJqZp19f";
     bool public saleIsActive = false;
 
     constructor() ERC721("TheSporties", "TSPT") {
