@@ -5,13 +5,17 @@
   "scripts": {
     "install-dev": "npm install --only=dev",
     "install-prod": "npm install --only=prod",
-    "truffle-compile": "truffle compile",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "clean": "rm -rf src/build && rm -rf build",
-    "deploy": "truffle migrate --network rinkeby --reset",
+    "compile-contract": "truffle compile",
+    "deploy-contract": "truffle migrate --network rinkeby --reset",
     "flatten": "truffle-flattener contracts/TheSporties.sol > TheSporties.sol",
     "start": "react-scripts start",
-    "static": "serve -s build"
+    "static": "serve -s build",
+    "firebase-deploy-live": "firebase deploy",
+    "firebase-deploy-preview": "firebase hosting:channel:deploy preview --expires 1h",
+    "firebase-delete-preview": "firebase hosting:channel:delete preview",
+    "firebase-preview-list": "firebase hosting:channel:list"
   },
   "eslintConfig": {
     "extends": "react-app"

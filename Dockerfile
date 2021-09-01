@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 
+RUN apt-get install gcc g++
+
 RUN npm run install-dev && npm run build
 
 COPY . .
