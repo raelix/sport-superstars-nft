@@ -7,8 +7,8 @@
     "web3": "^1.5.2"
   },
   "scripts": {
-    "install dev": "npm install --only=dev",
-    "install prod": "npm install --only=prod",
+    "install-dev": "npm install --only=dev",
+    "install-prod": "npm install --only=prod",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "clean": "rm -rf src/build && rm -rf build",
     "start": "react-scripts start",
