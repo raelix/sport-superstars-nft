@@ -4,7 +4,7 @@ import "./App.css";
 import Web3 from "web3";
 import CryptoBoys from "../abis/CryptoBoys.json";
 
-import FormAndPreview from "../components/FormAndPreview/FormAndPreview";
+import FormAndPreview from "./FormAndPreview/FormAndPreview";
 import AllCryptoBoys from "./AllCryptoBoys/AllCryptoBoys";
 import AccountDetails from "./AccountDetails/AccountDetails";
 import ContractNotDeployed from "./ContractNotDeployed/ContractNotDeployed";

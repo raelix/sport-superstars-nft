@@ -1,29 +1,22 @@
-import React, { Component } from "react";
-import { HashRouter, Route } from "react-router-dom";
-import "./App.css";
-import Web3 from "web3";
-import SportLegends from "../build/SportLegends.json";
 
+import { HashRouter, Route } from "react-router-dom";
+import Web3 from "web3";
+import "./App.css";
+import SportLegends from "../build/SportLegends.json";
+import React, { Component } from "react";
 import Mint from "./Mint/Mint";
 import Navbar from "./Navbar/Navbar";
-
-const ipfsClient = require("ipfs-http-client");
-const ipfs = ipfsClient({
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https",
-});
 
 const NetworksBinding = {
   4: 'https://rinkeby.etherscan.io'
 }
 
-class App extends Component {
+class App extends Component { 
   constructor(props) {
     super(props);
     this.state = {
       accountAddress: "",
-      accountBalance: "",
+      accountBalance: "", 
       sportLegendsContract: null,
       sportLegendsCount: 0,
       sportLegendsTotal: 0,
@@ -69,20 +62,20 @@ class App extends Component {
       const networkId = await web3.eth.net.getId();
       this.setState({ currentNetId: networkId });
       const networkData = SportLegends.networks[networkId];
-      if (networkData) {
-        const sportLegendsContract = web3.eth.Contract(
+      console.log(networkData);
+      if (networkData) { 
+        const sportLegendsContract = new web3.eth.Contract(
           SportLegends.abi,
           networkData.address
         );
         this.setState({ sportLegendsContract });
         this.setState({ contractDetected: true });
         const sportLegendsCount = await sportLegendsContract.methods.totalSupply().call();
-        let sportLegendsTotal = await sportLegendsContract.methods.TOTAL_ITEMS.call();
+        const sportLegendsTotal = await sportLegendsContract.methods.TOTAL_ITEMS().call();
         const tokenBalance = await sportLegendsContract.methods.balanceOf(accounts[0]).call();
-        const maxItemsPerMint = await sportLegendsContract.methods.MAX_ITEMS_PER_MINT.call();
+        const maxItemsPerMint = await sportLegendsContract.methods.MAX_ITEMS_PER_MINT().call();
         let itemPrice = await sportLegendsContract.methods.itemPrice().call();
-        const saleIsActive = await sportLegendsContract.methods.saleIsActive.call();
-        sportLegendsTotal = sportLegendsTotal.toNumber();
+        const saleIsActive = await sportLegendsContract.methods.saleIsActive().call();
         itemPrice = web3.utils.fromWei(itemPrice.toString(), "Ether");
         this.setState({ sportLegendsCount });
         this.setState({ sportLegendsTotal });

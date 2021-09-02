@@ -1,68 +1,55 @@
 {
   "dependencies": {
-    "serve": "^12.0.0",
-    "babel-polyfill": "6.26.0",
-    "babel-preset-env": "1.7.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-stage-2": "6.24.1",
-    "babel-preset-stage-3": "6.24.1",
-    "babel-register": "6.26.0",
-    "bootstrap": "4.3.1",
-    "react": "16.8.4",
-    "react-bootstrap": "1.0.0-beta.5",
-    "react-dom": "16.8.4",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "2.1.3",
-    "web3": "1.0.0-beta.55"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.1",
+    "react-scripts": "4.0.3",
+    "web3": "^1.5.2"
   },
   "scripts": {
-    "install-dev": "npm install --only=dev",
-    "install-prod": "npm install --only=prod",
+    "install dev": "npm install --only=dev",
+    "install prod": "npm install --only=prod",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "clean": "rm -rf src/build && rm -rf build",
-    "compile-contract": "truffle compile",
-    "deploy-contract": "truffle migrate --network rinkeby --reset",
-    "flatten": "truffle-flattener contracts/TheSporties.sol > TheSporties.sol",
     "start": "react-scripts start",
     "static": "serve -s build",
+    "compile-contract": "truffle compile",
+    "deploy-contract": "truffle migrate --network rinkeby --reset",
+    "flatten-contract": "truffle-flattener contracts/SportLegends.sol",
     "firebase-deploy-live": "firebase deploy",
     "firebase-deploy-preview": "firebase hosting:channel:deploy preview --expires 1h",
     "firebase-delete-preview": "firebase hosting:channel:delete preview",
     "firebase-preview-list": "firebase hosting:channel:list"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "web3": "1.0.0-beta.55",
-    "gh-pages": "^3.1.0",
     "@truffle/hdwallet-provider": "^1.4.3",
-    "babel-polyfill": "6.26.0",
-    "babel-preset-env": "1.7.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-stage-2": "6.24.1",
-    "babel-preset-stage-3": "6.24.1",
-    "babel-register": "6.26.0",
     "base-path-converter": "^1.0.2",
     "canvas": "^2.8.0",
-    "chai": "4.2.0",
-    "chai-as-promised": "7.1.1",
-    "chai-bignumber": "3.0.0",
     "commander": "^8.1.0",
-    "dayjs": "^1.10.4",
     "dotenv": "^10.0.0",
     "ipfs-http-client": "^49.0.2",
     "openzeppelin-solidity": "^3.4.0",
     "recursive-fs": "^2.1.0",
-    "serve": "^12.0.0",
     "truffle": "5.4.6",
     "truffle-flattener": "^1.5.0",
     "truffle-plugin-verify": "^0.5.11"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
