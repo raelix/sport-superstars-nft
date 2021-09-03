@@ -28,3 +28,20 @@ input[type="color"]:hover {
   padding: 10px !important;
   color: white !important;
 }
+
+body {
+  background-color: #333 !important;
+  /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); 
+  get some examples here: https://getbootstrap.com/docs/4.0/examples/cover/#
+  */
+  color: #fff;
+  justify-content: center;
+  display: flex;
+}
+
+
+.backcolor {
+
+  background-color: #333 !important;
+}

@@ -17,13 +17,12 @@ class Navbar extends Component {
 
   connectToMetamask = async () => {
     await window.ethereum.enable();
-    window.location.reload();
+    window.location.reload(); 
   };
 
   render() {
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div className="container">
+      <nav className="navbar navbar-expand-lg navbar-dark backcolor">
           <img src={icon} alt="" />
           <Link to="/" className="navbar-brand ml-2">
             Sport Legends
@@ -69,7 +68,6 @@ class Navbar extends Component {
               </li>
             </ul>
           </div>
-        </div>
       </nav>
     );
   };

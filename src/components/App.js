@@ -131,15 +131,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <>
+      <div className="d-flex h-100 p-3 mx-auto flex-column">
           <HashRouter basename="/">
             <Navbar parentState={(this.state)} />
             <Route
               path="/"
               exact
               render={() => (
-                <div />
+                <br/>
               )}
             />
             <Route
@@ -161,7 +160,6 @@ class App extends Component {
               )}
             />
           </HashRouter>
-        </>
       </div>
     );
   }
