@@ -3,15 +3,15 @@ import icon from "./favicon-32x32.png";
 import { Link } from "react-router-dom";
 import AccountDetails from "../AccountDetails/AccountDetails";
 import ConnectToMetamask from "../ConnectMetamask/ConnectToMetamask";
-import Loading from "../Loading/Loading";
+// import Loading from "../Loading/Loading";
 import { Component } from "react";
 
 
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
 
 
@@ -22,7 +22,7 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark backcolor">
+      <nav className="navbar navbar-expand-lg navbar-dark backcolor p-1">
           <img src={icon} alt="" />
           <Link to="/" className="navbar-brand ml-2">
             Sport Legends
@@ -30,14 +30,13 @@ class Navbar extends Component {
           <button
             className="navbar-toggler"
             data-toggle="collapse"
-            data-target="#navbarNav"
-          >
+            data-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div id="navbarNav" className="collapse navbar-collapse">
             <ul
-              style={{ fontSize: "0.8rem", letterSpacing: "0.2rem" }}
-              className="navbar-nav ml-auto"
+              style={{ fontSize: "0.8rem", letterSpacing: "0.1rem" }}
+            className="navbar-nav ml-auto text-light"
             >
               <li className="nav-item">
                 <Link to="/" className="nav-link">

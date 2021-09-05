@@ -29,19 +29,41 @@ input[type="color"]:hover {
   color: white !important;
 }
 
-body {
-  background-color: #333 !important;
+html, body {
+    height: 100%;
+  /* background-color: #333 !important; */
+  font-family: Sportypo !important;
   /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); 
   get some examples here: https://getbootstrap.com/docs/4.0/examples/cover/#
   */
-  color: #fff;
+  /* color: #fff;
   justify-content: center;
-  display: flex;
+  display: flex; */
 }
-
+#root {
+  height: 100vh;
+}
 
 .backcolor {
 
   background-color: #333 !important;
 }
+
+@font-face {
+  font-family: "Sportypo";
+  src: local('Sportypo'), url(./fonts/Sportypo.ttf) format('truetype');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: 'Sportypo';
+  src: local('Horizon'), url(./fonts/Horizon.otf) format('opentype');
+  unicode-range: U+0030-0039;
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+/* 
+.navbar{ 
+  text-transform: capitalize !important;
+} */

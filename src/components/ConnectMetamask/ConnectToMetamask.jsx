@@ -7,7 +7,7 @@ const ConnectToMetamask = ({ connectToMetamask }) => {
       <button
         onClick={connectToMetamask}
         className="btn btn-primary d-flex align-items-center"
-        style={{ fontSize: "0.9rem", letterSpacing: "0.14rem" }}
+        style={{ fontSize: "0.65rem" }}
       >
         Connect Metamask{" "}
         <img

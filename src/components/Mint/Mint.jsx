@@ -14,7 +14,7 @@ class Mint extends Component {
 
     render() {
         return (
-            <div class="d-flex flex-row  overflow-hidden p-3 text-center bg-light">
+            <div class="d-flex flex-row  overflow-hidden p-3 text-center text-light">
             <div class= "mx-3 mt-3 w-100"></div>
             <div class= "ml-auto mr-3 mt-3 ">
             <form
@@ -28,7 +28,7 @@ class Mint extends Component {
                 <div className="form-group mt-4 ">
                     <label htmlFor="tokenCount">
                         <span className="font-weight-bold">Mint Sport Legends</span> :
-                    </label>{" "}
+                    </label>
                     <input
                         required
                         type="number"
