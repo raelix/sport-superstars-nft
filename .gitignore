@@ -9,6 +9,7 @@
 /randomMap.json
 /input/*/*.png
 /metadata/images/*.png
+/metadata/*.json
 # testing
 /coverage
 

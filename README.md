@@ -4,6 +4,10 @@
 
 https://discord.gg/EcgEet9G
 
+### Generate gif
+```
+convert -resize 50% -delay 20 -loop 0 metadata/images/*.png output.gif
+```
 ### Run the DApp Locally
 #### Install truffle
 ```
