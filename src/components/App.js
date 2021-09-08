@@ -6,6 +6,7 @@ import SportLegends from "../build/SportLegends.json";
 import React, { Component } from "react";
 import Mint from "./Mint/Mint";
 import Navbar from "./Navbar/Navbar";
+import Loading from "./Loading/Loading"
 // import { withRouter } from "react-router";
 
 const NetworksBinding = {
@@ -16,7 +17,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      delay: 3000
+      delay: 3000,
+      loading: false
       // accountAddress: "",
       // loading: true,
       // smartContract: null,
@@ -41,6 +43,7 @@ class App extends Component {
 
   componentDidMount = async () => {
     // https://blog.bitsrc.io/polling-in-react-using-the-useinterval-custom-hook-e2bcefda4197 
+    this.setState({loading: true});
     await this.loadWeb3();
     await this.loadBlockchainData();
     this.interval = setInterval(this.getContractData, this.state.delay)
@@ -172,12 +175,24 @@ class App extends Component {
 
 
   render() {
+
+  //   if (this.state.loading){
+  //   return 
+    
+  //     <div className="d-flex h-100 mx-auto flex-column">
+  //       <HashRouter basename="/">
+  //         <Navbar parentState={(this.state)} />
+  //         <Loading>ciao</Loading>
+  //         </HashRouter>
+  //         </div>
+    
+  // }
+  //   else
     return (
       <div className="d-flex h-100 mx-auto flex-column">
         <HashRouter basename="/">
 
           <Navbar parentState={(this.state)} />
-
           <Route
             path="/"
             exact
