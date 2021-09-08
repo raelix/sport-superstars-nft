@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { createCanvas, loadImage } = require("canvas");
 const { layers, rarity, width, height } = require('./layersLoader.js');
+const { namesGenerator } = require('./namesGenerator.js')
 
 const outputFolder = "./metadata";
 const outputImagesFolder = `${outputFolder}/images`;
@@ -37,13 +38,16 @@ const addProperty = async (layer, element, elementIndex) => {
     });
 }
 
-const addRarityProperty = (elementIndex, value) => {
+const addRandomLevelProperty = (elementIndex, name) => {
     metadata[elementIndex].attributes.push({
-        "trait_type": "Rarity",
-        "value": value
+        "trait_type": name,
+        "value": randomIntFromInterval(30, 99)
     });
 }
 
+const randomIntFromInterval = (min, max) =>  { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 const getRandom = (layers) => {
     let random = [];
@@ -100,11 +104,18 @@ const main = async (elementIndex) => {
     // push the empty item for this index
     metadata.push({
         id: `${elementIndex}`,
-        name: `Sport Legends #${elementIndex}`,
+        name: `${namesGenerator()} #${elementIndex}`,
         icon: "",
         description: `Sport Legends are here! Try to catch them!`,
         attributes: [],
     });
+
+    addRandomLevelProperty(elementIndex, "Offence");
+    addRandomLevelProperty(elementIndex, "Defence");
+    addRandomLevelProperty(elementIndex, "Speed");
+    addRandomLevelProperty(elementIndex, "Stamina");
+    addRandomLevelProperty(elementIndex, "Technique");
+    addRandomLevelProperty(elementIndex, "Strength");
 
     for (let index = 0; index < layers.length; index++) {
 
@@ -126,8 +137,7 @@ const main = async (elementIndex) => {
 
     saveImage(canvas, elementIndex);
     let itemRarityPercentage = computeMetadataIndexRarity(elementIndex);
-    addRarityProperty(elementIndex, itemRarityPercentage);
-    console.log(`Generated image n. ${elementIndex}`);
+    console.log(`Generated image n. ${elementIndex} - rarity: ${itemRarityPercentage}`);
     setTimeout(main, 1, ++elementIndex);
 }
 
