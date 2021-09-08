@@ -25,7 +25,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg navbar-dark backcolor p-1">
           <img src={icon} alt="" />
           <Link to="/" className="navbar-brand ml-2">
-            Sport Legends
+            Sport Superstars
           </Link>
           <button
             className="navbar-toggler"

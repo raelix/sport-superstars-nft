@@ -10,7 +10,7 @@ const AccountDetails = ({ accountAddress, error }) => {
           alt="metamask-icon"
           style={{ width: "1.5rem", marginRight: "0.35rem" }}
         />
-        <p class="h5 m-2 text-light">{error ? "Wrong Network" : accountAddress.substring(0, 6) + '...' + accountAddress.substring(accountAddress.length - 4, accountAddress.length)}</p>
+        <p class="h5 m-2 standard-font text-light">{error ? "Wrong Network" : accountAddress.substring(0, 6) + '...' + accountAddress.substring(accountAddress.length - 4, accountAddress.length)}</p>
       </div>
     </div>
   );

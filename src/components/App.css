@@ -46,8 +46,11 @@ html, body {
 }
 
 .backcolor {
-
   background-color: #333 !important;
+}
+
+.standard-font {
+  font: 1em Horizon !important;
 }
 
 @font-face {
