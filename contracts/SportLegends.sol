@@ -53,22 +53,26 @@ contract SportLegends is ERC721, Ownable {
         _presaleMapIndex = mapIndex;
     }
 
-    function getPreSaleMapIndex() public onlyOwner view returns( uint32 ) {
-        return _presaleMapIndex;
-    }
-
     function setPreSalesAddresses( address [] memory recipients ) public onlyOwner {   
         for( uint256 i ; i < recipients.length; i++ ){
             _preSaleAddress[_presaleMapIndex][recipients[i]] = 1;
         }
     }
-    
+
     function setBaseURI(string memory baseURI) public onlyOwner {
         _setBaseURI(baseURI);
     }
     
     function setTokenURI(uint256 tokenId, string memory _tokenURI) public onlyOwner {
         _setTokenURI(tokenId, _tokenURI);
+    }
+
+    function getPreSaleMapIndex() public view returns( uint32 ) {
+        return _presaleMapIndex;
+    }
+
+    function isAddressAllowedForPreSale(address recipient ) public view returns( bool ) {   
+        return    _preSaleAddress[_presaleMapIndex][recipient] > 0;
     }
 
     function getGiftItems() public view returns( uint256 ){
