@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { createCanvas, loadImage } = require("canvas");
-const { layers, rarity, width, height } = require('./layersLoader.js');
+// const { layers, rarity, width, height } = require('./layersLoader.js');
+const { layers } = require('./layersLoader.js');
 const { namesGenerator } = require('./namesGenerator.js')
 
 const outputFolder = "./metadata";
@@ -23,9 +24,6 @@ const saveImage = (canvas, elementIndex) => {
 const loadLayer = async (layer, elementIndex, randomNumber) => {
     // get a random item of this layer
     let element = layer.elements[randomNumber];
-    // console.log(`element ${element.attributeName}`);
-
-    // console.log(`there is a ${layer.rarity[element.attributeName]} % of probability to see this`);
     addProperty(layer, element, elementIndex);
     return await loadImage(`${layer.location}${element.fileName}`);
 
@@ -36,17 +34,28 @@ const addProperty = async (layer, element, elementIndex) => {
         "trait_type": layer.name,
         "value": element.attributeName
     });
+    if (layer.name === "Number"){
+        metadata[elementIndex]["name"] = `${namesGenerator()} #${element.attributeName}`
+    }
 }
 
-const addRandomLevelProperty = (elementIndex, name) => {
-    metadata[elementIndex].attributes.push({
+const addRandomLevelProperty = (elementIndex, name, displayType) => {
+    let attributes = {
         "trait_type": name,
         "value": randomIntFromInterval(30, 99)
-    });
+    }
+    if (displayType){
+        attributes["display_type"] = displayType;
+    }
+    metadata[elementIndex].attributes.push(attributes);
 }
 
 const randomIntFromInterval = (min, max) =>  { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+const getOneOnTen = () => {
+    return randomIntFromInterval(1,10) == 1
 }
 
 const getRandom = (layers) => {
@@ -71,14 +80,14 @@ const getRandomMap = (MAX_ITEMS, layers) => {
 }
 
 
-const computeMetadataIndexRarity = (currentIndex) => {
-    let totalLayers = layers.length;
-    let sumLayersRarity = 0;
-    metadata[currentIndex].attributes.forEach((item) => {
-        sumLayersRarity += rarity[item.value];
-    });
-    return Math.floor(sumLayersRarity * 100 / (totalLayers * 100));
-}
+// const computeMetadataIndexRarity = (currentIndex) => {
+//     let totalLayers = layers.length;
+//     let sumLayersRarity = 0;
+//     metadata[currentIndex].attributes.forEach((item) => {
+//         sumLayersRarity += rarity[item.value];
+//     });
+//     return Math.floor(sumLayersRarity * 100 / (totalLayers * 100));
+// }
 
 function write(array, path) {
     fs.writeFileSync(path, JSON.stringify(array, null, 2));
@@ -104,7 +113,6 @@ const main = async (elementIndex) => {
     // push the empty item for this index
     metadata.push({
         id: `${elementIndex}`,
-        name: `${namesGenerator()} #${elementIndex}`,
         icon: "",
         description: `Sport Legends are here! Try to catch them!`,
         attributes: [],
@@ -116,6 +124,18 @@ const main = async (elementIndex) => {
     addRandomLevelProperty(elementIndex, "Stamina");
     addRandomLevelProperty(elementIndex, "Technique");
     addRandomLevelProperty(elementIndex, "Strength");
+    if (getOneOnTen()){
+        addRandomLevelProperty(elementIndex, "Morale", "boost_percentage");
+    }
+    if (getOneOnTen()){
+        addRandomLevelProperty(elementIndex, "fitness", "boost_percentage");
+    }
+    // if (getOneOnTen()){
+    //     addRandomLevelProperty(elementIndex, "Strength", "boost_number");
+    // }
+    // if (getOneOnTen()){
+    //     addRandomLevelProperty(elementIndex, "Strength", "boost_number");
+    // }
 
     for (let index = 0; index < layers.length; index++) {
 
@@ -136,8 +156,8 @@ const main = async (elementIndex) => {
     }
 
     saveImage(canvas, elementIndex);
-    let itemRarityPercentage = computeMetadataIndexRarity(elementIndex);
-    console.log(`Generated image n. ${elementIndex} - rarity: ${itemRarityPercentage}`);
+    // let itemRarityPercentage = computeMetadataIndexRarity(elementIndex);
+    console.log(`Generated image n. ${elementIndex}`);
     setTimeout(main, 1, ++elementIndex);
 }
 

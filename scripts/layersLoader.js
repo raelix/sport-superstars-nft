@@ -3,7 +3,7 @@ const width = 1000;
 const height = 1000;
 const dir = "./input";
 
-const orderedFolders = ["background", "body", "shirt", "eyes", "hair", "accessories", "look", "number"];
+const orderedFolders = ["background", "body", "sport", "eyes", "hair", "accessories", "look", "number"];
 
 const getAttributeFromFileName = (_str) => {
     // Explanation:
@@ -67,14 +67,14 @@ const getElementsRarityByFolder = (path) => {
     return result;
 };
 
-const getElementsRarityMap = (orderedFolders) => {
-    let result = {};
-    orderedFolders.forEach((item, index) => {
-        let currentFolder = getElementsRarityByFolder(`${dir}/${item}/`);
-        result = { ...result, ...currentFolder }
-    });
-    return result;
-}
+// const getElementsRarityMap = (orderedFolders) => {
+//     let result = {};
+//     orderedFolders.forEach((item, index) => {
+//         let currentFolder = getElementsRarityByFolder(`${dir}/${item}/`);
+//         result = { ...result, ...currentFolder }
+//     });
+//     return result;
+// }
 
 // occurrences:total length=x:100
 const generateLayersList = (orderedFolders, layers) => {
@@ -95,6 +95,7 @@ const generateLayersList = (orderedFolders, layers) => {
 
 const layers = generateLayersList(orderedFolders, []);
 
-const rarity = getElementsRarityMap(orderedFolders);
+// const rarity = getElementsRarityMap(orderedFolders);
 
-module.exports = { layers, rarity, width, height };
+// module.exports = { layers, rarity, width, height };
+module.exports = { layers };
