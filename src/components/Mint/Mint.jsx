@@ -1,34 +1,89 @@
 import React, { Component } from "react";
+import Button from "../Button/Button";
+
+const SOLDOUT = "SOLDOUT"
+const NOT_YET_READY = "SALE INACTIVE"
+const PRE_SALE_ACTIVE_BUT_CANT = "YOU ARE NOT ELIGIBLE FOR PRE-SALE"
+const PRE_SALE_ACTIVE_SOLDOUT = "PRE-SALE SOLDOUT"
+const PRE_SALE_ACTIVE = "PRE-SALE MINT"
+const SALE_ACTIVE = "MINT"
 
 class Mint extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            tokenCount: 1,
-            active: false
+            tokenCount: 1
         };
-
     }
 
-    mint = (tokenCount) => {
-        this.props.mint(tokenCount);
+
+    mint = (tokenCount, isPreSale = false) => {
+        this.props.mint(tokenCount, isPreSale);
     };
 
-    render() {
-        this.state.active = (this.props.parentState.saleIsActive ||
+    isEnabledMintButton = () => {
+        return (this.props.parentState.saleIsActive ||
             (this.props.parentState.preSaleIsActive && this.props.parentState.isAddressAllowedForPreSale)) &&
-            (this.props.parentState.mintedTokenCount < this.props.parentState.totalTokenCount);
+            (this.props.parentState.mintedTokenCount < this.props.parentState.totalTokenCount)
+    }
 
+    getButtonText = () => {
+        let state = this.props.parentState;
+        if (state.mintedTokenCount >= state.totalTokenCount) {
+            return SOLDOUT
+        }
+        else if (!state.saleIsActive && !state.preSaleIsActive) {
+            return NOT_YET_READY
+        }
+        else if (state.preSaleIsActive && !state.isAddressAllowedForPreSale) {
+            return PRE_SALE_ACTIVE_BUT_CANT
+        }
+        else if (state.preSaleIsActive && state.isAddressAllowedForPreSale && state.preSaleItemsCount >= state.maxPreSaleItemsCount) {
+            return PRE_SALE_ACTIVE_SOLDOUT
+        }
+        else if (state.preSaleIsActive && state.isAddressAllowedForPreSale && state.preSaleItemsCount < state.maxPreSaleItemsCount) {
+            return PRE_SALE_ACTIVE + ' (' + (this.props.parentState.itemPrice * this.state.tokenCount).toFixed(2) + ' eth) '
+        }
+        else if (state.saleIsActive && state.mintedTokenCount < state.totalTokenCount) {
+            return SALE_ACTIVE + ' (' + (this.props.parentState.itemPrice * this.state.tokenCount).toFixed(2) + ' eth) '
+        }
+    }
+
+    getMaxItemsPerMint = () => {
+        return this.props.parentState.maxItemsPerMint
+    }
+
+    isPreSale = () => {
+        return !this.props.parentState.saleIsActive && this.props.parentState.preSaleIsActive
+    }
+
+    getPercentageMinted = () => {
+        return ((this.props.parentState.mintedTokenCount * 100) / this.props.parentState.totalTokenCount).toFixed(2)
+    }
+
+    render() {
         return (
-            <div class="d-flex flex-row  overflow-hidden p-3 text-center text-dark">
-                <div class="mx-3 mt-3"></div>
-                <div class="ml-auto mr-3 mt-3 ">
+            <div class="d-flex flex-column  overflow-hidden p-3 text-center text-dark">
+                <div class="ml-auto mr-auto mt-3 ">Ciao</div>
+                <div class="mt-3 w-50 ml-auto mr-auto">
+                    <div class="progress">
+                        <div 
+                        class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                        style={{ width: this.getPercentageMinted() + "%" }}
+                        role="progressbar" 
+                        aria-valuenow={this.getPercentageMinted()} 
+                        aria-valuemin="0" 
+                        aria-valuemax="100" ></div>
+                    </div>
+                </div>
+                <div class="ml-auto mr-auto mt-3 standard-font">{this.props.parentState.mintedTokenCount}/{this.props.parentState.totalTokenCount} Minted</div>
+                <div class="ml-auto mr-auto mt-3 ">
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
                             this.mint(
-                                this.state.tokenCount
+                                this.state.tokenCount, this.isPreSale()
                             );
                         }}
                     >
@@ -43,29 +98,16 @@ class Mint extends Component {
                                 id="tokenCount"
                                 value={this.state.tokenCount}
                                 min="1"
-                                max={this.props.parentState.maxItemsPerMint}
+                                max={this.getMaxItemsPerMint()}
                                 className="form-control  mt-0 "
-                                placeholder="Enter new price"
-                                onChange={(e) =>
-                                    this.setState({
-                                        tokenCount: e.target.value,
-                                    })
-                                }
+                                placeholder="Enter token count"
+                                onChange={(e) => this.setState({ tokenCount: e.target.value })}
                             />
                         </div>
-                        <button
-                            type="submit"
-                            disabled={ !this.state.active }
-                            style={{ fontSize: "0.8rem", letterSpacing: "0.14rem" }}
-                            className="btn btn-outline-info mt-0 ">
-                            {
-                                this.props.parentState.sportLegendsCount >= this.props.parentState.sportLegendsTotal ?
-                                    'SOLDOUT' :
-                                    this.props.parentState.saleIsActive ?
-                                        'Mint (' + this.props.parentState.itemPrice * this.state.tokenCount + ' eth)' :
-                                        'SALE INACTIVE'
-                            }
-                        </button>
+                        <Button
+                            active={this.isEnabledMintButton()}
+                            text={this.getButtonText()}
+                        />
                     </form>
                 </div>
             </div>

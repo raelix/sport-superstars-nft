@@ -95,6 +95,8 @@ class App extends Component {
         this.getContractData();
       } else {
         this.setState({ contractDetected: false });
+        // window.ethereum.request({ method: 'wallet_switchEthereumChain', params:[{chainId: `0x${networkId}`}]});
+        // window.reload()
       }
       this.setState({ loading: false });
     }
@@ -143,18 +145,16 @@ class App extends Component {
     // setTimeout(this.getContractData(), 1000);
   }
 
-  mint = async (tokenCount) => {
-    console.log('Mint please');
+  mint = async (tokenCount, isPreSale) => {
     const netID = this.state.currentNetId;
     this.setState({ loading: true });
     const totalPrice = this.state.itemPrice * tokenCount;
-    console.log(`Total mint price: ${totalPrice}`);
+    console.log(`Total mint price: ${totalPrice} - is pre-sale? ${isPreSale}`);
+    if(!isPreSale)
     this.state.smartContract.methods
       .mintSportLegends(tokenCount)
       .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
-      // .send({ from: this.state.accountAddress, value: window.web3.utils.toWei('0.0001', "Ether") })
       .on("confirmation", function (res) {
-        console.log(`Confirmed by the block ${res}`);
         if (res === 1)
           window.alert('Confirmed!');
 
@@ -163,14 +163,32 @@ class App extends Component {
         window.alert(error.message);
       })
       .on('transactionHash', function (transactionHash) {
-        console.log(transactionHash);
         const transactionURL = NetworksBinding[netID] + '/tx/' + transactionHash;
         window.alert(`You can check your transaction ${transactionURL}`);
       })
       .on('receipt', function (receipt) {
-        console.log('receipt')
         console.log(receipt.contractAddress)
       });
+      else{
+        this.state.smartContract.methods
+      .mintPreSaleSportLegends(tokenCount)
+      .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
+      .on("confirmation", function (res) {
+        if (res === 1)
+          window.alert('Confirmed!');
+
+      })
+      .on('error', function (error) {
+        window.alert(error.message);
+      })
+      .on('transactionHash', function (transactionHash) {
+        const transactionURL = NetworksBinding[netID] + '/tx/' + transactionHash;
+        window.alert(`You can check your transaction ${transactionURL}`);
+      })
+      .on('receipt', function (receipt) {
+        console.log(receipt.contractAddress)
+      });
+      }
   }
 
 
