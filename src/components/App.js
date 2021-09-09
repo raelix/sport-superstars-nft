@@ -228,10 +228,15 @@ class App extends Component {
           <Route
             path="/mint"
             render={() => {
-              if (!this.state.contractDetected || this.state.contractDetected === undefined) {
+              if (!this.state.contractDetected) {
                 window.alert("connect to MetaMask and to the Ethereum mainnet before try to mint.")
                 return (
                   <Redirect from="/mint" to="/" />
+                )
+              }
+              if (this.state.loading) {
+                return (
+                  <Loading />
                 )
               }
               else

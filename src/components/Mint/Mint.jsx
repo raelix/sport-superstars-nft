@@ -99,7 +99,7 @@ class Mint extends Component {
                     >
                         <div className="form-group mt-4 ">
                             <label htmlFor="tokenCount">
-                                <span className="font-weight-bold">Mint Sport Superstars</span> :
+                                <span >Mint Sport Superstars</span> :
                             </label>
                             <input
                                 required
