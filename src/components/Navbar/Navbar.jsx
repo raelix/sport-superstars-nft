@@ -58,7 +58,7 @@ class Navbar extends Component {
                   Roadmap
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" style={{"margin":"auto"}}>
                 {!this.props.parentState.metamaskConnected ? 
                 ( <ConnectToMetamask connectToMetamask={this.connectToMetamask} />) 
                 :

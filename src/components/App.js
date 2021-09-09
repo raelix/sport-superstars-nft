@@ -1,5 +1,6 @@
 
-import { HashRouter, Route } from "react-router-dom";
+import { Redirect, HashRouter, Route } from "react-router-dom";
+import RingLoader from "react-spinners/RingLoader";
 import Web3 from "web3";
 import "./App.css";
 import SportLegends from "../build/SportLegends.json";
@@ -43,14 +44,15 @@ class App extends Component {
 
   componentDidMount = async () => {
     // https://blog.bitsrc.io/polling-in-react-using-the-useinterval-custom-hook-e2bcefda4197 
-    this.setState({loading: true});
+    this.setState({ loading: true });
     await this.loadWeb3();
     await this.loadBlockchainData();
-    this.interval = setInterval(this.getContractData, this.state.delay)
+    if (this.state.contractDetected)
+      this.interval = setInterval(this.getContractData, this.state.delay)
   };
 
-  componentDidUpdate (prevProps, prevState){
-    if(prevState.delay !== this.state.delay){
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.delay !== this.state.delay) {
       clearInterval(this.interval);
       this.interval = setInterval(this.getContractData, this.state.delay)
     }
@@ -75,30 +77,28 @@ class App extends Component {
   loadBlockchainData = async () => {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
+    this.setState({ loading: true });
     if (accounts.length === 0) {
+      // MetaMask not connected
       this.setState({ metamaskConnected: false });
+      this.setState({ loading: false });
     } else {
+      // Metamask connected
       this.setState({ metamaskConnected: true });
-      this.setState({ loading: true });
       this.setState({ accountAddress: accounts[0] });
       const networkId = await web3.eth.net.getId();
       this.setState({ currentNetId: networkId });
       const networkData = SportLegends.networks[networkId];
-      // console.log(networkData);
       if (networkData) {
-        const smartContract = new web3.eth.Contract(
-          SportLegends.abi,
-          networkData.address
-        );
+        // Connected to the right network
+        const smartContract = new web3.eth.Contract(SportLegends.abi, networkData.address);
         this.setState({ smartContract });
         this.setState({ contractDetected: true });
-        this.getContractData();
       } else {
+        // Connected to the wrong network
         this.setState({ contractDetected: false });
-        // window.ethereum.request({ method: 'wallet_switchEthereumChain', params:[{chainId: `0x${networkId}`}]});
-        // window.reload()
+        this.setState({ loading: false });
       }
-      this.setState({ loading: false });
     }
   };
 
@@ -150,86 +150,124 @@ class App extends Component {
     this.setState({ loading: true });
     const totalPrice = this.state.itemPrice * tokenCount;
     console.log(`Total mint price: ${totalPrice} - is pre-sale? ${isPreSale}`);
-    if(!isPreSale)
-    this.state.smartContract.methods
-      .mintSportLegends(tokenCount)
-      .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
-      .on("confirmation", function (res) {
-        if (res === 1)
-          window.alert('Confirmed!');
+    if (!isPreSale)
+      this.state.smartContract.methods
+        .mintSportLegends(tokenCount)
+        .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
+        .on("confirmation", function (res) {
+          if (res === 1)
+            window.alert('Confirmed!');
 
-      })
-      .on('error', function (error) {
-        window.alert(error.message);
-      })
-      .on('transactionHash', function (transactionHash) {
-        const transactionURL = NetworksBinding[netID] + '/tx/' + transactionHash;
-        window.alert(`You can check your transaction ${transactionURL}`);
-      })
-      .on('receipt', function (receipt) {
-        console.log(receipt.contractAddress)
-      });
-      else{
-        this.state.smartContract.methods
-      .mintPreSaleSportLegends(tokenCount)
-      .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
-      .on("confirmation", function (res) {
-        if (res === 1)
-          window.alert('Confirmed!');
+        })
+        .on('error', function (error) {
+          window.alert(error.message);
+        })
+        .on('transactionHash', function (transactionHash) {
+          const transactionURL = NetworksBinding[netID] + '/tx/' + transactionHash;
+          window.alert(`You can check your transaction ${transactionURL}`);
+        })
+        .on('receipt', function (receipt) {
+          console.log(receipt.contractAddress)
+        });
+    else {
+      this.state.smartContract.methods
+        .mintPreSaleSportLegends(tokenCount)
+        .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
+        .on("confirmation", function (res) {
+          if (res === 1)
+            window.alert('Confirmed!');
 
-      })
-      .on('error', function (error) {
-        window.alert(error.message);
-      })
-      .on('transactionHash', function (transactionHash) {
-        const transactionURL = NetworksBinding[netID] + '/tx/' + transactionHash;
-        window.alert(`You can check your transaction ${transactionURL}`);
-      })
-      .on('receipt', function (receipt) {
-        console.log(receipt.contractAddress)
-      });
-      }
+        })
+        .on('error', function (error) {
+          window.alert(error.message);
+        })
+        .on('transactionHash', function (transactionHash) {
+          const transactionURL = NetworksBinding[netID] + '/tx/' + transactionHash;
+          window.alert(`You can check your transaction ${transactionURL}`);
+        })
+        .on('receipt', function (receipt) {
+          console.log(receipt.contractAddress)
+        });
+    }
   }
 
 
   render() {
 
-  //   if (this.state.loading){
-  //   return 
-    
-  //     <div className="d-flex h-100 mx-auto flex-column">
-  //       <HashRouter basename="/">
-  //         <Navbar parentState={(this.state)} />
-  //         <Loading>ciao</Loading>
-  //         </HashRouter>
-  //         </div>
-    
-  // }
-  //   else
+    //   if (this.state.loading){
+    //   return 
+
+    //     <div className="d-flex h-100 mx-auto flex-column">
+    //       <HashRouter basename="/">
+    //         <Navbar parentState={(this.state)} />
+    //         <Loading>ciao</Loading>
+    //         </HashRouter>
+    //         </div>
+
+    // }
+    //   else
     return (
       <div className="d-flex h-100 mx-auto flex-column">
         <HashRouter basename="/">
 
           <Navbar parentState={(this.state)} />
+
           <Route
             path="/"
             exact
-            render={() => (
-              <div >
-                <p class="text-dark text-center h2 m-5">Sport Superstars are here!</p>
-                <a class="btn btn-dark rounded-pill btn-lg px-5 mx-auto mr-auto ml-auto" href="#/mint">GET STARTED</a>
-              </div>
-            )}
+            render={() => {
+              if (this.state.loading) {
+                return (
+
+                  <div
+                    style={{
+                      "margin": "auto",
+                      "display": "block"
+                    }}>
+
+                    <RingLoader
+                      color="black"
+                      css={{
+                        "margin-bottom": "50px !important",
+                        "margin": "auto",
+                        "display": "block"
+                      }}
+                      size={150} />
+
+                    <text class="standard-font">Loading data from the Blockchain</text>
+                    
+                  </div>
+                )
+              }
+              else
+                return (
+                  <div >
+                    <p class="text-dark text-center h2 m-5">Sport Superstars are here!</p>
+                    <a class="btn btn-dark rounded-pill btn-lg px-5 mx-auto mr-auto ml-auto" href="#/mint">GET STARTED</a>
+                  </div>
+                )
+            }
+            }
           />
           <Route
             path="/mint"
-            render={() => (
-              <Mint 
-              mint={this.mint} 
-              parentState={this.state} 
-              enableButton={this.state}
-              />
-            )}
+            render={() => {
+              if (!this.state.contractDetected || this.state.contractDetected === undefined) {
+                window.alert("connect to MetaMask and to the Ethereum mainnet before try to mint.")
+                return (
+                  <Redirect from="/mint" to="/" />
+                )
+              }
+              else
+                return (
+                  <Mint
+                    mint={this.mint}
+                    parentState={this.state}
+                    enableButton={this.state}
+                  />
+                )
+            }
+            }
           />
           <Route
             path="/team"

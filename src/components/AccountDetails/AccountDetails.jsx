@@ -3,8 +3,8 @@ import metamaskIcon from "../ConnectMetamask/metamask.svg";
 
 const AccountDetails = ({ accountAddress, error }) => {
   return (
-    <div className="flex-container"> 
-      <div className="flex-container int-container">
+    <div class="flex-container"> 
+      <div class="flex-container int-container">
         <img
           src={metamaskIcon}
           alt="metamask-icon"
