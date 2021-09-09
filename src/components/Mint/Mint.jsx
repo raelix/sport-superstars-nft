@@ -59,7 +59,17 @@ class Mint extends Component {
     }
 
     getPercentageMinted = () => {
-        return ((this.props.parentState.mintedTokenCount * 100) / this.props.parentState.totalTokenCount).toFixed(2)
+        if (!this.isPreSale())
+            return ((this.props.parentState.mintedTokenCount * 100) / this.props.parentState.totalTokenCount).toFixed(2)
+        else
+            return ((this.props.parentState.preSaleItemsCount * 100) / this.props.parentState.maxPreSaleItemsCount).toFixed(2)
+    }
+
+    getMintedStatisticString = () => {
+        if (!this.isPreSale())
+            return  `${this.props.parentState.mintedTokenCount} / ${this.props.parentState.totalTokenCount} Minted`
+        else
+            return `${this.props.parentState.preSaleItemsCount} / ${this.props.parentState.maxPreSaleItemsCount} Minted`
     }
 
     render() {
@@ -77,7 +87,7 @@ class Mint extends Component {
                         aria-valuemax="100" ></div>
                     </div>
                 </div>
-                <div class="ml-auto mr-auto mt-3 standard-font">{this.props.parentState.mintedTokenCount}/{this.props.parentState.totalTokenCount} Minted</div>
+                <div class="ml-auto mr-auto mt-3 standard-font">{this.getMintedStatisticString()}</div>
                 <div class="ml-auto mr-auto mt-3 ">
                     <form
                         onSubmit={(e) => {

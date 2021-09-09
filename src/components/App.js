@@ -46,6 +46,7 @@ class App extends Component {
     // https://blog.bitsrc.io/polling-in-react-using-the-useinterval-custom-hook-e2bcefda4197 
     this.setState({ loading: true });
     await this.loadWeb3();
+    if (!this.state.skipBrowser)
     await this.loadBlockchainData();
     if (this.state.contractDetected)
       this.interval = setInterval(this.getContractData, this.state.delay)
@@ -68,8 +69,9 @@ class App extends Component {
     } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
     } else {
+      this.setState({ skipBrowser: true });
       window.alert(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
+        "Non-Ethereum browser detected. The data can't be fetched!"
       );
     }
   };
@@ -235,7 +237,7 @@ class App extends Component {
                       size={150} />
 
                     <text class="standard-font">Loading data from the Blockchain</text>
-                    
+
                   </div>
                 )
               }
@@ -298,7 +300,7 @@ class App extends Component {
         <footer class="footer mt-2 mx-auto ">
 
           <p style={{ fontSize: "0.8rem", letterSpacing: "0.1rem", color: "black" }}
-          ><span >© </span> 2021 Sport Legends</p>
+          ><span >© </span> 2021 Sport Superstars</p>
         </footer>
       </div>
     );
