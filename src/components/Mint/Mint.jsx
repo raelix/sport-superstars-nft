@@ -69,17 +69,17 @@ class Mint extends Component {
         if (!this.isPreSale())
             return  `${this.props.parentState.mintedTokenCount} / ${this.props.parentState.totalTokenCount} Minted`
         else
-            return `${this.props.parentState.preSaleItemsCount} / ${this.props.parentState.maxPreSaleItemsCount} Minted`
+            return `${this.props.parentState.preSaleItemsCount} / ${this.props.parentState.maxPreSaleItemsCount} Minted on pre-sale`
     }
 
     render() {
         return (
-            <div class="d-flex flex-column  overflow-hidden p-3 text-center text-dark">
+            <div class="d-flex flex-column p-3 text-center text-dark">
                 <div class="ml-auto mr-auto mt-3 ">Ciao</div>
                 <div class="mt-3 w-50 ml-auto mr-auto">
-                    <div class="progress">
+                    <div class="progress" style={{"box-shadow": "2px 2px 1px #888888"}}>
                         <div 
-                        class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                        class="progress-bar progress-bar-striped progress-bar-animated bg-info" 
                         style={{ width: this.getPercentageMinted() + "%" }}
                         role="progressbar" 
                         aria-valuenow={this.getPercentageMinted()} 
