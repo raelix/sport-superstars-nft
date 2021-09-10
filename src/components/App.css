@@ -29,10 +29,14 @@ input[type="color"]:hover {
   color: white !important;
 }
 
+.text-white {
+  /*color: white !important;*/
+}
+
 html, body {
     height: 100%;
-  /* background-color: #333 !important; */
-background: radial-gradient(circle, rgba(218,255,96,1) 0%, rgba(43,179,2,1) 100%);
+    /*color: white !important;*/
+  background: #d3e3ff !important;
   font-family: Sportypo !important;
   /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); 
@@ -47,11 +51,15 @@ background: radial-gradient(circle, rgba(218,255,96,1) 0%, rgba(43,179,2,1) 100%
 }
 
 .backcolor {
-  background-color: #333 !important;
+  background-color: black !important;
 }
 
 .standard-font {
   font: 1em Horizon !important;
+}
+
+.brick-font {
+  font: 1em BrickShapers !important;
 }
 
 .none-font {
@@ -65,6 +73,12 @@ background: radial-gradient(circle, rgba(218,255,96,1) 0%, rgba(43,179,2,1) 100%
                             'embedded-opentype', and 'svg' */
 }
 @font-face {
+  font-family: "BrickShapers";
+  src: local('BrickShapers'), url(./fonts/BrickShapers.otf) format('truetype');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
   font-family: 'Sportypo';
   src: local('Horizon'), url(./fonts/Horizon.otf) format('opentype');
   unicode-range: U+0030-0039;
@@ -74,7 +88,28 @@ background: radial-gradient(circle, rgba(218,255,96,1) 0%, rgba(43,179,2,1) 100%
 
 .lb-b-background {
 /* https://cssgradient.io/ background: rgb(2,0,36), */
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(1,134,174,1) 75%, rgba(0,212,255,1) 100%);
+background: black;
+}
+
+.sss-card {
+   
+}
+
+.sss-card img {
+  width: 200px;
+  height: 200px;
+}
+
+.sss-card .sss-card-big {
+  font-size: 5em !important;
+}
+
+.sss-card .sss-card-title {
+  font-size: 3em !important;
+}
+
+.sss-card .sss-card-text {
+  font-size: 2em !important;
 }
 
 

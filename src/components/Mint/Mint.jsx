@@ -74,8 +74,8 @@ class Mint extends Component {
 
     render() {
         return (
-            <div class="d-flex flex-column p-3 text-center text-dark">
-                <div class="ml-auto mr-auto mt-3 ">Ciao</div>
+            <div class="d-flex flex-column p-3 text-center">
+                <div class="ml-auto mr-auto mt-3 "></div>
                 <div class="mt-3 w-50 ml-auto mr-auto">
                     <div class="progress" style={{"box-shadow": "2px 2px 1px #888888"}}>
                         <div 
