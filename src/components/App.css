@@ -34,8 +34,7 @@ input[type="color"]:hover {
 }
 
 html, body {
-    height: 100%;
-    /*color: white !important;*/
+  height: 100%;
   background: #d3e3ff !important;
   font-family: BrickShapers !important;
   /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);

@@ -23,7 +23,6 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark backcolor p-1 lb-b-background">
-          <img src={icon} alt="" />
           <Link to="/" className="navbar-brand ml-5">
             Sport Superstars
           </Link>
