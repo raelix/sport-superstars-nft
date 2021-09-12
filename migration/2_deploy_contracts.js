@@ -1,5 +1,5 @@
-const SportLegends = artifacts.require("SportLegends");
+const SportSuperstars = artifacts.require("SportSuperstars");
 
 module.exports = function (deployer) {
-  deployer.deploy(SportLegends);
+  deployer.deploy(SportSuperstars);
 };

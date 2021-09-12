@@ -13,6 +13,8 @@ class Team extends Component {
     render() {
         return (
             <div class="d-flex flex-column my-5 ">
+
+                <text class="d-flex h1 mr-auto ml-auto">The Sport Superstars team</text>
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
                     <img src={giammy}  />
                     <div class="d-flex my-auto flex-column">

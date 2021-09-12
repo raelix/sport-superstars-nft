@@ -2,7 +2,7 @@
 import { Redirect, HashRouter, Route } from "react-router-dom";
 import Web3 from "web3";
 import "./App.css";
-import SportLegends from "../build/SportLegends.json";
+import SportSuperstars from "../build/SportSuperstars.json";
 import React, { Component } from "react";
 import Mint from "./Mint/Mint";
 import Team from "./Team/Team";
@@ -100,10 +100,10 @@ class App extends Component {
       this.setState({ accountAddress: accounts[0] });
       const networkId = await web3.eth.net.getId();
       this.setState({ currentNetId: networkId });
-      const networkData = SportLegends.networks[networkId];
+      const networkData = SportSuperstars.networks[networkId];
       if (networkData) {
         // Connected to the right network
-        const smartContract = new web3.eth.Contract(SportLegends.abi, networkData.address);
+        const smartContract = new web3.eth.Contract(SportSuperstars.abi, networkData.address);
         this.setState({ smartContract });
         this.setState({ contractDetected: true });
       } else {
@@ -159,12 +159,12 @@ class App extends Component {
 
   mint = async (tokenCount, isPreSale) => {
     const netID = this.state.currentNetId;
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
     const totalPrice = this.state.itemPrice * tokenCount;
     console.log(`Total mint price: ${totalPrice} - is pre-sale? ${isPreSale}`);
     if (!isPreSale)
       this.state.smartContract.methods
-        .mintSportLegends(tokenCount)
+        .mintSportSuperstars(tokenCount)
         .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
         .on("confirmation", function (res) {
           if (res === 1)
@@ -183,7 +183,7 @@ class App extends Component {
         });
     else {
       this.state.smartContract.methods
-        .mintPreSaleSportLegends(tokenCount)
+        .mintPreSaleSportSuperstars(tokenCount)
         .send({ from: this.state.accountAddress, value: window.web3.utils.toWei(totalPrice.toString(), "Ether") })
         .on("confirmation", function (res) {
           if (res === 1)

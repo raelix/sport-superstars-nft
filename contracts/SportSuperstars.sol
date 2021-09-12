@@ -7,7 +7,7 @@ import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract SportLegends is ERC721, Ownable {
+contract SportSuperstars is ERC721, Ownable {
 
     using SafeMath for uint256;
     
@@ -32,7 +32,7 @@ contract SportLegends is ERC721, Ownable {
 
     mapping (uint32 => mapping (address => uint32)) private _preSaleAddress;
 
-    constructor() ERC721("Sport Legends", "SPL") {
+    constructor() ERC721("Sport Superstars", "SSS") {
     }
 
     function withdraw() public onlyOwner {
@@ -92,7 +92,7 @@ contract SportLegends is ERC721, Ownable {
         }
     }
 
-    function giftSportLegends( address [] memory recipients ) public onlyOwner {
+    function giftSportSuperstars( address [] memory recipients ) public onlyOwner {
         require(recipients.length + giftItems < GIFT_ITEMS + 1, "Can't gift more than 70 items");
         require(totalSupply().add(recipients.length) <= TOTAL_ITEMS, "Gift items would exceed max supply");
         uint256 supply = totalSupply();        
@@ -102,7 +102,7 @@ contract SportLegends is ERC721, Ownable {
         }
     }
 
-    function mintPreSaleSportLegends(uint numberOfTokens) public payable {
+    function mintPreSaleSportSuperstars(uint numberOfTokens) public payable {
         require(preSaleIsActive, "Pre sale must be active to mint");
         require(_preSaleAddress[_presaleMapIndex][msg.sender] > 0, "You are not allowed to partecipate to the pre sale mint");
         require(numberOfTokens + preSaleItems < PREADOPT_ITEMS + 1, "Can't mint more than 700 items");
@@ -119,7 +119,7 @@ contract SportLegends is ERC721, Ownable {
         }
     }
 
-    function mintSportLegends(uint numberOfTokens) public payable {
+    function mintSportSuperstars(uint numberOfTokens) public payable {
         require(saleIsActive, "Sale must be active to mint");
         require(numberOfTokens <= MAX_ITEMS_PER_MINT, "Can't mint more than 10 items");
         require(totalSupply().add(numberOfTokens) <= TOTAL_ITEMS, "Purchase would exceed max supply");

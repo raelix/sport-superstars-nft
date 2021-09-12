@@ -17,7 +17,7 @@
     "static": "serve -s build",
     "compile-contract": "truffle compile",
     "deploy-contract": "truffle migrate --network rinkeby --reset",
-    "flatten-contract": "truffle-flattener contracts/SportLegends.sol",
+    "flatten-contract": "truffle-flattener contracts/SportSuperstars.sol",
     "firebase-deploy-live": "firebase deploy",
     "firebase-deploy-preview": "firebase hosting:channel:deploy preview --expires 1h",
     "firebase-delete-preview": "firebase hosting:channel:delete preview",
