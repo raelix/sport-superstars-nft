@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import facco from "../images/pogger.png";
-import giamma from "../images/pogger.png";
+import facco from "../images/facco.png";
+import raelix from "../images/raelix.png";
+import giammy from "../images/giammy.png";
 
 class Team extends Component {
 
@@ -13,7 +14,7 @@ class Team extends Component {
         return (
             <div class="d-flex flex-column my-5 ">
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
-                    <img src={giamma}  />
+                    <img src={giammy}  />
                     <div class="d-flex my-auto flex-column">
                         <p class="sss-card-title brick-font text-black">Giammy</p>
                         <p class="sss-card-text brick-font">Developer</p>
@@ -24,7 +25,7 @@ class Team extends Component {
                         <p class="sss-card-title brick-font text-black">Raelix</p>
                         <p class="sss-card-text brick-font">Designer</p>
                     </div>
-                    <img src={facco}  />
+                    <img src={raelix}  />
                 </div>
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
                     <img src={facco}  />

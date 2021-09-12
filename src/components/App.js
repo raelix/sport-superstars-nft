@@ -11,6 +11,7 @@ import Navbar from "./Navbar/Navbar";
 import Loading from "./Loading/Loading"
 
 import radar from "./images/radar.png";
+import banner from "./images/banner.png";
 
 
 // import { withRouter } from "react-router";
@@ -222,6 +223,7 @@ class App extends Component {
               else
                 return (
                   <div class="d-flex w-75 mx-auto flex-column p-3 text-center text-black">
+                    <img src={banner} class="w-75 my-2 mx-auto banner-image" />
                     <p class="text-center h1 my-3 brick-font">
                       Welcome to the Sport Superstars hera where 7,777 unique players lives on the Ethereum blockchain! 
                       They were born to change the sport NFT collectibles market, based on ERC-721 token. 
