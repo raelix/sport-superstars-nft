@@ -111,8 +111,8 @@ background: black;
 }
 
 .radar-chart {
-  width: 500px;
-  height: 500px;
+  max-width: 400px;
+  max-height: 400px;
 }
 
 /* 

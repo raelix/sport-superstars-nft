@@ -233,10 +233,10 @@ class App extends Component {
                       Each player will also have in-game stats that will be fundamental for future roadmap milestones. 
                       We plan to mostly work on collaborations in the near future, but check the Roadmap for further information!
                     </p>
-                    <div class="d-flex p-3 text-center">
-                      <img src={radar} class="radar-chart" />
-                      <div class="d-flex flex-column my-auto">
-                        <p class="text-center h1 m-5 brick-font">
+                    <div class="d-flex flex-wrap flex-fill align-content-between my-5">
+                      <img src={radar} class="radar-chart flex-fill mx-auto" />
+                      <div class="d-flex flex-column my-auto w-50 mx-auto">
+                        <p class="text-center h1 brick-font mx-auto my-auto ">
                           In addition to esthetic properties and cool extras,
                           each Superstar will will have a unique identity, starting from the name, 
                           shirt number and a set of attributes that will help him to dominate his sport.
@@ -244,7 +244,7 @@ class App extends Component {
                           <br />
                           Collect the game changers, rule the game with the best players in the universe!
                         </p>
-                        <a class="btn btn-outline-info btn-dark btn-lg px-5 mx-auto my-auto button-text" href="#/mint">GET YOURS</a>
+                        <a class="btn btn-outline-info btn-dark btn-lg px-5 mx-auto my-4 button-text" href="#/mint">GET YOURS</a>
                       </div>                    
                     </div>
                   </div>
