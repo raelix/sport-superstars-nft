@@ -14,23 +14,23 @@ class Team extends Component {
             <div class="d-flex flex-column my-5 ">
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
                     <img src={giamma}  />
-                    <div class="d-flex flex-column">
-                        <p class="mt-5 fs-1 sss-card-title brick-font">Giammy</p>
-                        <p class="mt-2 fs-3 sss-card-text brick-font">Developer</p>
+                    <div class="d-flex my-auto flex-column">
+                        <p class="sss-card-title brick-font text-black">Giammy</p>
+                        <p class="sss-card-text brick-font">Developer</p>
                     </div>
                 </div>
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
-                    <div class="d-flex flex-column">
-                        <p class="mt-5 fs-1 sss-card-title brick-font">Raelix</p>
-                        <p class="mt-2 h-3 sss-card-text brick-font">Designer</p>
+                    <div class="d-flex my-auto flex-column">
+                        <p class="sss-card-title brick-font text-black">Raelix</p>
+                        <p class="sss-card-text brick-font">Designer</p>
                     </div>
                     <img src={facco}  />
                 </div>
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
                     <img src={facco}  />
-                    <div class="d-flex flex-column">
-                        <p class="mt-5 fs-1 sss-card-title brick-font">Facco</p>
-                        <p class="mt-2 h-3 sss-card-text brick-font">Roadmap</p>
+                    <div class="d-flex my-auto flex-column">
+                        <p class="sss-card-title brick-font text-black">Facco</p>
+                        <p class="sss-card-text brick-font">Roadmap</p>
                     </div>
                 </div>
             </div>

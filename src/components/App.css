@@ -37,7 +37,7 @@ html, body {
     height: 100%;
     /*color: white !important;*/
   background: #d3e3ff !important;
-  font-family: Sportypo !important;
+  font-family: BrickShapers !important;
   /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); 
   get some examples here: https://getbootstrap.com/docs/4.0/examples/cover/#
@@ -54,34 +54,13 @@ html, body {
   background-color: black !important;
 }
 
-.standard-font {
-  font: 1em Horizon !important;
-}
-
 .brick-font {
-  font: 1em BrickShapers !important;
+  font-family: BrickShapers !important;
 }
 
-.none-font {
-  font-family: "Nunito Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" !important;
-}
-
-@font-face {
-  font-family: "Sportypo";
-  src: local('Sportypo'), url(./fonts/Sportypo.ttf) format('truetype');
-  /* other formats include: 'woff2', 'truetype, 'opentype',
-                            'embedded-opentype', and 'svg' */
-}
 @font-face {
   font-family: "BrickShapers";
   src: local('BrickShapers'), url(./fonts/BrickShapers.otf) format('truetype');
-  /* other formats include: 'woff2', 'truetype, 'opentype',
-                            'embedded-opentype', and 'svg' */
-}
-@font-face {
-  font-family: 'Sportypo';
-  src: local('Horizon'), url(./fonts/Horizon.otf) format('opentype');
-  unicode-range: U+0030-0039;
   /* other formats include: 'woff2', 'truetype, 'opentype',
                             'embedded-opentype', and 'svg' */
 }
@@ -89,6 +68,10 @@ html, body {
 .lb-b-background {
 /* https://cssgradient.io/ background: rgb(2,0,36), */
 background: black;
+}
+
+.text-black {
+  color: black !important;
 }
 
 .sss-card {
@@ -112,6 +95,17 @@ background: black;
   font-size: 2em !important;
 }
 
+.button-text {
+  font-size: 2em !important;
+}
+
+.navbar-brand {
+  font-size: 3em !important;
+}
+
+.nav-link {
+  font-size: 2em !important;
+}
 
 /* 
 .navbar{ 

@@ -24,16 +24,16 @@ class Roadmap extends Component {
 
     render() {
         return (
-            <div class="d-flex flex-column my-2 ">
+            <div class="d-flex flex-column mt-4 ">
                 { ROADMAP_ITEMS.map(function(item, index) {
-                        return <div class="d-flex flex-row w-75 my-3 mx-auto justify-content-around sss-card">
-                        <div class="d-flex flex-column">
-                            <p class="mt-5 sss-card-big brick-font">{index * 10}%</p>
-                        </div>
-                        <div class="d-flex flex-column w-50">
-                            <p class="mt-5 sss-card-text brick-font">{item}</p>
-                        </div>
-                    </div>
+                    return <div class="d-flex flex-row w-75 my-2 mx-auto justify-content-around sss-card">
+                                <div class="d-flex my-auto">
+                                    <p class="sss-card-big brick-font text-black">{index * 10}%</p>
+                                </div>
+                                <div class="d-flex w-50 my-auto">
+                                    <p class="sss-card-text brick-font">{item}</p>
+                                </div>
+                            </div>
                     })
                 }
                 

@@ -9,6 +9,10 @@ import Team from "./Team/Team";
 import Roadmap from "./Roadmap/Roadmap";
 import Navbar from "./Navbar/Navbar";
 import Loading from "./Loading/Loading"
+
+import radar from "./images/radar.png";
+
+
 // import { withRouter } from "react-router";
 
 const NetworksBinding = {
@@ -217,11 +221,22 @@ class App extends Component {
               }
               else
                 return (
-                  <div class="d-flex flex-column p-3 text-center">
-                    <p class="text-center h2 m-5 none-font">
+                  <div class="d-flex w-75 mx-auto flex-column p-3 text-center text-black">
+                    <p class="text-center h1 my-3 brick-font">
                       Welcome to the Sport Superstars hera where 7,777 unique players lives on the Ethereum blockchain! They born to change the sport NFT collectibles market,  based on ERC-721 token, coming around the universe are programmatically and randomly generated starting from 7 breed and 7 sports properties and more than 1,6 million possible combinations. Each player will also have in-game stats that will be fundamental for future roadmap milestones. We plan to mostly work on collaborations in the near future, but check the Roadmap for further information!
                     </p>
-                    <a class="btn btn-outline-info mt-0 btn-dark btn-lg px-5 mx-auto mr-auto ml-auto" href="#/mint">GET YOURS</a>
+                    <div class="d-flex p-3 text-center">
+                      <img src={radar} />
+                      <div class="d-flex flex-column my-auto">
+                        <p class="text-center h1 m-5 brick-font">
+                          Each Superstar will will have a unique identity, starting from the name, shirt number and a set of attributes that will help him to dominate his sport.
+                          <br />
+                          <br />
+                          Collect the game changers, rule the game with the best players in the universe!
+                        </p>
+                        <a class="btn btn-outline-info btn-dark btn-lg px-5 mx-auto my-auto button-text" href="#/mint">GET YOURS</a>
+                      </div>                    
+                    </div>
                   </div>
                 )
             }
@@ -269,7 +284,7 @@ class App extends Component {
             }}
           />
         </HashRouter>
-        <div class="footer mt-auto mx-auto ">
+        <div class="footer mt-1 mx-auto ">
           <a class="m-2" href="https://twitter.com/SportSuperstars">
             <svg src="https://a.com" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" viewBox="0 0 16 16">
               <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
@@ -284,7 +299,7 @@ class App extends Component {
         </div>
         <footer class="footer mt-2 mx-auto ">
 
-          <p style={{ fontSize: "0.8rem", letterSpacing: "0.1rem", color: "black" }}
+          <p class="h3"
           ><span >© </span> 2021 Sport Superstars</p>
         </footer>
       </div>
