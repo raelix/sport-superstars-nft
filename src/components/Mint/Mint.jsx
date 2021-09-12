@@ -87,8 +87,8 @@ class Mint extends Component {
                         aria-valuemax="100" ></div>
                     </div>
                 </div>
-                <div class="ml-auto mr-auto mt-3 standard-font">{this.getMintedStatisticString()}</div>
-                <div class="ml-auto mr-auto mt-3 ">
+                <div class="ml-auto mr-auto mt-3 big-text">{this.getMintedStatisticString()}</div>
+                <div class="ml-auto mr-auto mt-3 medium-text">
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
