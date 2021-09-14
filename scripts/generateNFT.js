@@ -1,17 +1,34 @@
 const fs = require("fs");
 const { createCanvas, loadImage } = require("canvas");
-// const { layers, rarity, width, height } = require('./layersLoader.js');
 const { layers } = require('./layersLoader.js');
 const { namesGenerator } = require('./namesGenerator.js')
 
 const outputFolder = "./metadata";
 const outputImagesFolder = `${outputFolder}/images`;
 // const MAX_ITEMS = 8888;
-const MAX_ITEMS = 300;
+const MAX_ITEMS = 10;
+
+const RANDOM_PROPERTIES = [
+    "Offence",
+    "Defence",
+    "Speed",
+    "Stamina",
+    "Technique",
+    "Strength",
+    "Morale",
+    "Fitness"
+]
+
+const FLIP_PROPERTIES = [
+    "Morale",
+    "Fitness"
+]
 
 // init canvas
 
 let metadata = [];
+
+let metadataPreReveal = [];
 
 
 // functions
@@ -34,35 +51,48 @@ const addProperty = async (layer, element, elementIndex) => {
         "trait_type": layer.name,
         "value": element.attributeName
     });
-    if (layer.name === "Number"){
-        metadata[elementIndex]["name"] = `${namesGenerator()} #${element.attributeName}`
-    }
 }
 
-const addRandomLevelProperty = (elementIndex, name, displayType) => {
+const addLevelProperty = (elementIndex, name, value, displayType) => {
     let attributes = {
         "trait_type": name,
-        "value": randomIntFromInterval(30, 99)
+        "value": value
     }
-    if (displayType){
+    if (displayType) {
         attributes["display_type"] = displayType;
     }
     metadata[elementIndex].attributes.push(attributes);
 }
 
-const randomIntFromInterval = (min, max) =>  { // min and max included 
+const randomIntFromInterval = (min, max) => { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 const getOneOnTen = () => {
-    return randomIntFromInterval(1,10) == 1
+    return randomIntFromInterval(1, 10) == 1
 }
 
 const getRandom = (layers) => {
     let random = [];
+    let levels = {}
     for (let i = 0; i < layers.length; i++) {
-        random.push(Math.floor(Math.random() * layers[i].elements.length));
+        let layer = layers[i];
+        let randomNumber = Math.floor(Math.random() * layer.elements.length);
+        if (layer.name === "Number") {
+            levels["name"] = `${namesGenerator()} #${layer.elements[randomNumber].attributeName}`
+        }
+        random.push(randomNumber);
     }
+    for (let i = 0; i < RANDOM_PROPERTIES.length; i++) {
+        let randomPropertyName = RANDOM_PROPERTIES[i];
+        if (
+            (FLIP_PROPERTIES.indexOf(randomPropertyName) === -1) ||
+            (FLIP_PROPERTIES.indexOf(randomPropertyName) !== -1 && getOneOnTen())
+        ) {
+            levels[randomPropertyName] = randomIntFromInterval(30, 99);
+        }
+    }
+    random.push(levels);
     return random;
 }
 
@@ -80,15 +110,6 @@ const getRandomMap = (MAX_ITEMS, layers) => {
 }
 
 
-// const computeMetadataIndexRarity = (currentIndex) => {
-//     let totalLayers = layers.length;
-//     let sumLayersRarity = 0;
-//     metadata[currentIndex].attributes.forEach((item) => {
-//         sumLayersRarity += rarity[item.value];
-//     });
-//     return Math.floor(sumLayersRarity * 100 / (totalLayers * 100));
-// }
-
 function write(array, path) {
     fs.writeFileSync(path, JSON.stringify(array, null, 2));
 }
@@ -104,6 +125,7 @@ const main = async (elementIndex) => {
     if (elementIndex == MAX_ITEMS) {
         console.log('Generation completed. Saving metadata.');
         fs.writeFileSync(`${outputFolder}/_metadata.json`, JSON.stringify(metadata, null, 2));
+        fs.writeFileSync(`${outputFolder}/_metadataPreReveal.json`, JSON.stringify(metadataPreReveal, null, 2));
         return;
     }
 
@@ -111,31 +133,17 @@ const main = async (elementIndex) => {
     const ctx = canvas.getContext("2d");
     let drawedLayers = 0;
     // push the empty item for this index
-    metadata.push({
+    let itemEmpty = {
         id: `${elementIndex}`,
         icon: "",
-        description: `Sport Legends are here! Try to catch them!`,
+        description: `Sport Superstars are here! Try to catch them!`,
         attributes: [],
-    });
+    };
 
-    addRandomLevelProperty(elementIndex, "Offence");
-    addRandomLevelProperty(elementIndex, "Defence");
-    addRandomLevelProperty(elementIndex, "Speed");
-    addRandomLevelProperty(elementIndex, "Stamina");
-    addRandomLevelProperty(elementIndex, "Technique");
-    addRandomLevelProperty(elementIndex, "Strength");
-    if (getOneOnTen()){
-        addRandomLevelProperty(elementIndex, "Morale", "boost_percentage");
-    }
-    if (getOneOnTen()){
-        addRandomLevelProperty(elementIndex, "fitness", "boost_percentage");
-    }
-    // if (getOneOnTen()){
-    //     addRandomLevelProperty(elementIndex, "Strength", "boost_number");
-    // }
-    // if (getOneOnTen()){
-    //     addRandomLevelProperty(elementIndex, "Strength", "boost_number");
-    // }
+    metadata.push(itemEmpty);
+
+    metadataPreReveal.push(JSON.parse(JSON.stringify(itemEmpty)));
+
 
     for (let index = 0; index < layers.length; index++) {
 
@@ -155,8 +163,26 @@ const main = async (elementIndex) => {
         );
     }
 
+    // at the end of the layers list there is a map with the level properties
+    const propertiesMap = randomItems[elementIndex][layers.length];
+
+    metadata[elementIndex]["name"] = propertiesMap["name"];
+
+    metadataPreReveal[elementIndex]["name"] = propertiesMap["name"];
+
+    for (let i = 0; i < RANDOM_PROPERTIES.length; i++) {
+        let randomPropertyName = RANDOM_PROPERTIES[i];
+        let value = propertiesMap[randomPropertyName];
+
+        if (value !== undefined && FLIP_PROPERTIES.indexOf(randomPropertyName) === -1)
+            addLevelProperty(elementIndex, randomPropertyName, value)
+
+        if (value !== undefined && FLIP_PROPERTIES.indexOf(randomPropertyName) !== -1)
+            addLevelProperty(elementIndex, randomPropertyName, value, "boost_percentage")
+    }
+    // comment here if you want speed up and save just the metadata
     saveImage(canvas, elementIndex);
-    // let itemRarityPercentage = computeMetadataIndexRarity(elementIndex);
+
     console.log(`Generated image n. ${elementIndex}`);
     setTimeout(main, 1, ++elementIndex);
 }
@@ -169,8 +195,8 @@ let randomItems = {};
 // N.B. If you want to save this random map you need to uncomment the `read` line and comment the `randomItems` and `write` one
 randomItems = getRandomMap(MAX_ITEMS, layers);
 
-write(randomItems, `${outputFolder}/_randomMap.json`);
-// randomItems = read(`${outputFolder}/_randomMap.json`);
+write(randomItems, `${outputFolder}/seed.json`);
+// randomItems = read(`${outputFolder}/seed.json`);
 
 // let's start
 setTimeout(main, 1, 0);
