@@ -125,7 +125,7 @@ const main = async (elementIndex) => {
     if (elementIndex == MAX_ITEMS) {
         console.log('Generation completed. Saving metadata.');
         fs.writeFileSync(`${outputFolder}/_metadata.json`, JSON.stringify(metadata, null, 2));
-        fs.writeFileSync(`${outputFolder}/_metadataPreReveal.json`, JSON.stringify(metadataPreReveal, null, 2));
+        fs.writeFileSync(`${outputFolder}/_metadata-presale.json`, JSON.stringify(metadataPreReveal, null, 2));
         return;
     }
 
