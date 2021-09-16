@@ -6,7 +6,7 @@ const { namesGenerator } = require('./namesGenerator.js')
 const outputFolder = "./metadata";
 const outputImagesFolder = `${outputFolder}/images`;
 // const MAX_ITEMS = 8888;
-const MAX_ITEMS = 10;
+const MAX_ITEMS = 7777;
 
 const RANDOM_PROPERTIES = [
     "Offence",
