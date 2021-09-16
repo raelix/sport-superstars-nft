@@ -17,13 +17,13 @@ class Team extends Component {
                 <text class="d-flex h1 mx-auto mb-5">The Sport Superstars team</text>
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
                     <img src={giammy}  />
-                    <div class="d-flex my-auto flex-column">
+                    <div class="d-flex my-auto flex-column ml-2">
                         <p class="sss-card-title brick-font text-black">Giammy</p>
                         <p class="sss-card-text brick-font">Developer</p>
                     </div>
                 </div>
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
-                    <div class="d-flex my-auto flex-column">
+                    <div class="d-flex my-auto flex-column mr-2">
                         <p class="sss-card-title brick-font text-black">Raelix</p>
                         <p class="sss-card-text brick-font">Designer</p>
                     </div>
@@ -31,7 +31,7 @@ class Team extends Component {
                 </div>
                 <div class="d-flex flex-row w-50 my-3 mx-auto justify-content-around sss-card">
                     <img src={facco}  />
-                    <div class="d-flex my-auto flex-column">
+                    <div class="d-flex my-auto flex-column ml-2">
                         <p class="sss-card-title brick-font text-black">Facco</p>
                         <p class="sss-card-text brick-font">Roadmap</p>
                     </div>

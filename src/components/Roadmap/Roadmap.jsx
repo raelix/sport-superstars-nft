@@ -3,9 +3,9 @@ import React, { Component } from "react";
 
 const ROADMAP_ITEMS = [
     "Official Website, Discord and Twitter are online, the project will be added to Incoming Projects in rarity.tools",
-    "During the 2 (cambiare o 2 o 3) weeks before the mint we will distribute 40 players to early adopters and moderators, or thought giveaways. 15 players will be assigned to the team",
-    "700 players will be available to mint in early access, one day before the open mint",
-    "Mint will be officially opened on Friday October 1st at 20PM EST",
+    "During the 2 weeks before the mint we will distribute 40 players to early adopters and moderators, or thought giveaways. 7 players will be assigned to the team",
+    "700 players will be available to mint in early access, one day before the open mint (Friday October 1st, 19:00 EST)",
+    "Mint will be officially opened on Saturday October 2nd, 19:00 EST",
     "Sport players full images and attributes will be revealed 7 days after the mint",
     "10 more revealed players will be distributed through contests and giveaways",
     "Part of the mint revenue will be used to buy the floor items on OpenSea and keep the floor price high",

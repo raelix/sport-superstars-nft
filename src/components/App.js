@@ -222,7 +222,7 @@ class App extends Component {
               }
               else
                 return (
-                  <div class="d-flex w-75 mx-auto flex-column p-3 text-center text-black">
+                  <div class="d-flex w-100 p-3 mx-auto flex-column text-center text-black">
                     <img src={banner} class="w-75 my-2 mx-auto banner-image" />
                     <p class="text-center h1 my-3 brick-font">
                       Welcome to the Sport Superstars hera where 7,777 unique players lives on the Ethereum blockchain! 
@@ -233,9 +233,9 @@ class App extends Component {
                       Each player will also have in-game stats that will be fundamental for future roadmap milestones. 
                       We plan to mostly work on collaborations in the near future, but check the Roadmap for further information!
                     </p>
-                    <div class="d-flex flex-wrap flex-fill align-content-between my-5">
-                      <img src={radar} class="radar-chart flex-fill mx-auto" />
-                      <div class="d-flex flex-column my-auto w-50 mx-auto">
+                    <div class="d-flex flex-wrap flex-fill align-content-between px-3 my-5">
+                      <img src={radar} class="radar-chart img-fluid" />
+                      <div class="d-flex flex-column my-3 mx-auto w-75">
                         <p class="text-center h1 brick-font mx-auto my-auto ">
                           In addition to esthetic properties and cool extras,
                           each Superstar will will have a unique identity, starting from the name, 
