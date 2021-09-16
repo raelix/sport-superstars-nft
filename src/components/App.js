@@ -49,17 +49,19 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-    // https://blog.bitsrc.io/polling-in-react-using-the-useinterval-custom-hook-e2bcefda4197 
+    // https://blog.bitsrc.io/polling-in-react-using-the-useinterval-custom-hook-e2bcefda4197  
+    setTimeout(async () => {
     this.setState({ loading: true });
     await this.loadWeb3();
     if (!this.state.skipBrowser)
-      await this.loadBlockchainData();
+     await this.loadBlockchainData();
     else
       this.setState({ loading: false });
     if (this.state.contractDetected)
       this.interval = setInterval(this.getContractData, this.state.delay)
     else
       this.setState({ loading: false });
+   },300);
   };
 
   componentDidUpdate(prevProps, prevState) {
