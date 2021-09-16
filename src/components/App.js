@@ -90,7 +90,8 @@ class App extends Component {
 
   loadBlockchainData = async () => {
     const web3 = window.web3;
-    const accounts = await web3.eth.getAccounts();
+    if(web3 && web3.eth) {
+      const accounts = await web3.eth.getAccounts();
     this.setState({ loading: true });
     if (accounts.length === 0) {
       // MetaMask not connected
@@ -113,6 +114,7 @@ class App extends Component {
         this.setState({ contractDetected: false });
         this.setState({ loading: false });
       }
+    }
     }
   };
 
