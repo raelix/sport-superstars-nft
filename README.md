@@ -35,11 +35,11 @@ truffle compile
 ```
 #### Deploy smart contract to ganache
 ```
-truffle migrate
+truffle migrate --reset --network rinkeby
 ```
 #### Test smart contract
 ```
-truffle test
+truffle console --network rinkeby
 ```
 #### Start DApp
 ```

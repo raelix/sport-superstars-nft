@@ -16,12 +16,11 @@ contract SportSuperstars is ERC721, Ownable {
     bool public saleIsActive = false;
     bool public preSaleIsActive = false;
 
-    uint256 public constant itemPrice = 0.05 ether;
-    uint64 public constant RESERVED_ITEMS = 7;
+    uint256 public constant itemPrice = 0.06 ether;
     uint64 public constant GIFT_ITEMS = 70;
     uint64 public constant PREADOPT_ITEMS = 700;
     uint64 public constant ADOPT_ITEMS = 7000;
-    uint128 public constant TOTAL_ITEMS = ADOPT_ITEMS + PREADOPT_ITEMS + GIFT_ITEMS + RESERVED_ITEMS;
+    uint128 public constant TOTAL_ITEMS = 7777;
     uint128 public constant MAX_ITEMS_PER_MINT = 10;
 
     uint256 private giftItems = 0;
@@ -83,11 +82,11 @@ contract SportSuperstars is ERC721, Ownable {
         return preSaleItems;
     }
 
-    function reserveItems() public onlyOwner {        
-        require(totalSupply().add(RESERVED_ITEMS) <= TOTAL_ITEMS, "Reserved items would exceed max supply");
+    function reserveItems(uint numberOfTokens) public onlyOwner {        
+        require(totalSupply().add(numberOfTokens) <= TOTAL_ITEMS, "Reserved items would exceed max supply");
         uint supply = totalSupply();
         uint i;
-        for (i = 0; i < RESERVED_ITEMS; i++) {
+        for (i = 0; i < numberOfTokens; i++) {
             _safeMint(msg.sender, supply + i);
         }
     }
