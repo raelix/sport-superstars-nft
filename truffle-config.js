@@ -25,6 +25,7 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const fs = require('fs');
 
 const rinkeby_private_key = process.env.RINKEBY_PRIVATE_KEY
+const mainnet_private_key = process.env.MAINNET_PRIVATE_KEY
 
 const private_key = ""
 
@@ -87,6 +88,17 @@ module.exports = {
       network_id: 4,
       gas: 5500000,
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    },
+    mainnet: {
+      provider: () => new HDWalletProvider(mainnet_private_key, `https://mainnet.infura.io/v3/7c05c1e585be456fa310330d79a35b4e`),
+      // gas: 5000000,
+      // gasPrice: 5e9,
+
+      gas: 30000000,
+      gasPrice: 180000000000, // 65Gwei
+      network_id: 1,
+      // networkCheckTimeout: 1000000,
+      timeoutBlocks: 200,
     },
     // Useful for private networks
     // private: {
