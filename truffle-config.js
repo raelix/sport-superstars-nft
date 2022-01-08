@@ -39,7 +39,9 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-
+      plugins: [
+        'truffle-contract-size'
+      ],
   // contracts_directory: "./contracts/",
   contracts_build_directory: "./src/build/",
   migrations_directory: "./migration/",
@@ -76,7 +78,7 @@ module.exports = {
     // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     // },
     kovan: {
-      provider: () => new HDWalletProvider(private_key, `https://kovan.infura.io/v3/326743225dcd443d9087bae75c622a8a`),
+      provider: () => new HDWalletProvider(private_key, `https://kovan.infura.io/v3/`),
       network_id: 42,       // kovan's id
       gas: 12500000,        // kovan has a lower block limit than mainnet
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
@@ -84,21 +86,23 @@ module.exports = {
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
     rinkeby: {
-      provider: () => new HDWalletProvider(rinkeby_private_key, `https://rinkeby.infura.io/v3/2362480577a940d18fddfe12f46100d9`),
+      provider: () => new HDWalletProvider(rinkeby_private_key, `https://rinkeby.infura.io/v3/`),
       network_id: 4,
       gas: 5500000,
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
     mainnet: {
-      provider: () => new HDWalletProvider(mainnet_private_key, `https://mainnet.infura.io/v3/7c05c1e585be456fa310330d79a35b4e`),
-      // gas: 5000000,
-      // gasPrice: 5e9,
-
-      gas: 30000000,
-      gasPrice: 180000000000, // 65Gwei
+      provider: () => new HDWalletProvider(mainnet_private_key, `https://mainnet.infura.io/v3/`),
+      gasPrice: 68000000000, //79 gwei
+      confirmations: 2,
       network_id: 1,
-      // networkCheckTimeout: 1000000,
-      timeoutBlocks: 200,
+      skipDryRun: true
+      // // gas: 5000000,
+      // // gasPrice: 5e9,
+      // gas: 30000000,
+      // gasPrice: 180000000000, // 65Gwei
+      // // networkCheckTimeout: 1000000,
+      // timeoutBlocks: 200,
     },
     // Useful for private networks
     // private: {
@@ -120,7 +124,7 @@ module.exports = {
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       settings: {          // See the solidity docs for advice about optimization and evmVersion
        optimizer: {
-         enabled: false,
+         enabled: true,
          runs: 200
        }
       //  ,evmVersion: "byzantium"

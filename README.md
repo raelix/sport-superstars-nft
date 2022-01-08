@@ -1,4 +1,13 @@
 # Sport Legends NFT
+This project allows to fully build a new NFT collection on Ethereum block-chain and mint them through a ReactJS based website.
+
+There are some key features:
+- Image generation is completely random, based on pre-defined percentages, different SVG layers will be combined together. This will result in different clustering groups (common, rare, super-rare).
+- The website is built with ReactJS and Web3.
+- The generated images will be pushed to IPFS for resiliency and privacy.
+- The smart-contract is ERC721 and it leaverage the openzeppelin-solidity library.
+- Utility scrits are located under ./scripts folder.
+
 
 ### Discord Group Invite
 
@@ -62,3 +71,14 @@ for lay in $(inkscape --query-all NFT.svg  | grep "g" | grep -v svg | awk -F, '{
 inkscape NFT.svg -i $lay -j -C --export-png=testme/$lay.png; 
 done
 ```
+
+### Work-arounds
+```
+export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+### COSTS
+The cost = Gas Price x Amount of Gas consumed
+Cost = 80 Gwei * 2683987M = 214718960M Gwei = 0.21471896eth
+Cost = 50 Gwei * 2683987M = 134199350M Gwei = 0.13419935eth
+

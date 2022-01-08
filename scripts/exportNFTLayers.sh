@@ -4,8 +4,8 @@ FILENAME=${1:-./NFT.svg}
 OUTPUT_FOLDER=${2:-./input}
 
 # Default binary path
-#binary=/snap/bin/inkscape
-binary=/usr/bin/inkscape
+binary=/snap/bin/inkscape
+#binary=/usr/bin/inkscape
 unameOut="$(uname -s)"
 
 case "${unameOut}" in
